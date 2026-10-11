@@ -1,0 +1,66 @@
+# The experiment's design. Changing anything here after the first session is an amendment (PREREGISTRATION.md).
+seed: 20261011
+arms:
+  A: {label: Human only, ai: none}
+  B: {label: AI recommendation, ai: recommendation}
+  C: {label: AI with uncertainty and explanation, ai: full}
+block_size: 6               # blocked randomization: two of each arm per block
+cases_per_participant: 24   # 8 per domain, 4 with each outcome
+practice_cases: 2
+attention_checks: 2         # humans only
+bank_per_domain: 40         # 20 with each outcome
+explanation_factors: 3      # factors shown on each side in arm C
+split: {train: 0.6, calibration: 0.2, test: 0.2}
+
+domains:
+  loan:
+    label: Loan approval
+    dataset: credit-g
+    question: Approve this loan?
+    positive: {decision: approve, label: Approve, outcome: repaid as agreed}
+    negative: {decision: decline, label: Decline, outcome: defaulted or fell behind}
+    # relative costs of the two errors (PREREGISTRATION)
+    costs: {false_positive: 5, false_negative: 1}   # approving a bad risk 5; declining a good one 1
+    subgroup: {name: Applicant age, column: age, below: 25, labels: [under 25, 25 and over]}
+  marketing:
+    label: Marketing call
+    dataset: bank-marketing
+    question: Call this client about a term deposit?
+    positive: {decision: call, label: Call, outcome: subscribed}
+    negative: {decision: skip, label: Skip, outcome: did not subscribe}
+    costs: {false_positive: 1, false_negative: 3}   # calling a non-subscriber 1; skipping a subscriber 3
+    subgroup: {name: Client age, column: age, below: 60, labels: [under 60, 60 and over]}
+  credit_limit:
+    label: Credit-limit review
+    dataset: credit-default
+    question: Reduce this customer's credit limit?
+    positive: {decision: reduce, label: Reduce, outcome: defaulted next month}
+    negative: {decision: keep, label: Keep, outcome: paid next month}
+    costs: {false_positive: 1, false_negative: 4}   # reducing a non-defaulter 1; keeping a defaulter 4
+    subgroup: {name: Customer sex (not shown), column: sex, labels: [female, male]}
+
+datasets:
+  credit-g:
+    title: Statlog (German Credit Data)
+    source: UCI Machine Learning Repository (Hofmann, 1994), via OpenML 31
+    licence: CC BY 4.0
+    url: https://data.openml.org/datasets/0000/0031/dataset_31.pq
+    sha256: 5855869a10f25163c983e29b48bd11d5c3b2bddebe53cd305573083d23c8078f
+  bank-marketing:
+    title: Bank Marketing
+    source: UCI Machine Learning Repository (Moro, Rita & Cortez, 2014), via OpenML 1461
+    licence: CC BY 4.0
+    url: https://data.openml.org/datasets/0000/1461/dataset_1461.pq
+    sha256: 8a8bc2a12d8151da589f24d01e990a3690fc4259727a9797a24be4ae748b056c
+  credit-default:
+    title: Default of Credit Card Clients
+    source: UCI Machine Learning Repository (Yeh & Lien, 2009), via OpenML 42477
+    licence: CC BY 4.0
+    url: https://data.openml.org/datasets/0004/42477/dataset_42477.pq
+    sha256: 07d788ff41012cdf03d6b9d7471aaf4d446431f3a0aa960f5ddcda97c9fa37c0
+
+analysis:
+  permutations: 10000
+  bootstrap: 5000
+  alpha: 0.05
+  ece_bins: 5

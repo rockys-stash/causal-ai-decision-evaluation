@@ -1,0 +1,17 @@
+# Local open-weights language models for the model-participant pilot (llama.cpp, CPU).
+# `make models` downloads them (about 4.8 GB, models/) and checks SHA-256.
+models:
+  qwen3-4b:
+    label: Qwen3-4B-Instruct-2507 (Q4_0)
+    file: qwen3-4b-instruct-2507-q4_0.gguf
+    url: https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen3-4B-Instruct-2507-Q4_0.gguf
+    sha256: e0ba675d86ab277c61701c6793659b2ae801d95e3be791464c321e6fbf613be2
+  phi-4-mini:
+    label: Phi-4-mini-instruct (Q4_K_M)
+    file: phi-4-mini-instruct-q4_k_m.gguf
+    url: https://huggingface.co/unsloth/Phi-4-mini-instruct-GGUF/resolve/main/Phi-4-mini-instruct-Q4_K_M.gguf
+    sha256: 88c00229914083cd112853aab84ed51b87bdf6b9ce42f532d8c85c7c63b1730a
+threads: 2
+n_ctx: 2048
+temperature: 0.7
+pilot_per_arm: 6

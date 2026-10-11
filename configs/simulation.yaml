@@ -1,0 +1,35 @@
+# Simulated participants for the dry run. NOT people: a stated behaviour model, used to check that
+# the platform and the analysis work and to size the human study. Effects below are planted.
+#
+# Own judgement (every arm): log-odds of the positive decision =
+#   skill * (+1 if the positive decision is right, else -1) + shared * (AI's log-odds) + Normal(0, noise)
+# "shared" stands for cues people and the model both use (correlated errors), not for seeing the AI.
+# When the participant's own choice differs from a shown AI recommendation, they switch to it with
+#   B: probability switch_b;  C: probability 1 / (1 + exp(-(c0 + c1 * (AI confidence - 0.5)))).
+# Stated confidence = 50 + 50 * |2 * belief - 1| (+ noise), belief = the probability behind the final choice.
+# Time per decision (s): lognormal with the arm's median and a common spread.
+designs:
+  planted:
+    skill: 0.55
+    shared: 0.6
+    noise: 1.0
+    switch_b: 0.45
+    c0: -1.2
+    c1: 14.0
+    confidence_noise: 8
+    seconds_median: {A: 14.0, B: 12.0, C: 18.0}
+    seconds_sigma: 0.45
+  null:
+    skill: 0.55
+    shared: 0.6
+    noise: 1.0
+    switch_b: 0.0
+    c0: -50.0
+    c1: 0.0
+    confidence_noise: 8
+    seconds_median: {A: 14.0, B: 14.0, C: 14.0}
+    seconds_sigma: 0.45
+per_arm: 60          # end-to-end dry run through the API, per design
+null_repetitions: 500
+power_per_arm: [10, 20, 30, 40, 60, 80, 120]
+power_repetitions: 300

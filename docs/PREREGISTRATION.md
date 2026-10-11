@@ -82,3 +82,10 @@ reducing a non-defaulter's 1. Correct decisions cost 0.
 
 Results for one participant kind are never generalised to another. A significant model-pilot
 effect says how those models used the AI; it is not evidence about people.
+
+## Amendments
+
+**A1 (2026-10-11, before any model-participant session).** Model-participant pilot size: 6 per
+arm per model (18 per model, 36 in all, 864 analysed decisions) instead of 5. With blocks of 6,
+5 per arm cannot be reached with balanced arms; three complete blocks per model can. The
+model-participant answer format is fixed as JSON with the decision and an integer confidence.
