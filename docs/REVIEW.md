@@ -73,7 +73,8 @@ study pending.**
   real arm-C task page.
 - **Fresh clone** (2026-10-11): a new clone of `25eed6b` ran `make setup test lint smoke`, rebuilt
   the bank from the downloaded datasets with no difference, re-ran `make analysis` and
-  `make test-ui`, and passed. See the release reviewer for the regenerated report.
+  `make test-ui`, and passed. The regenerated `docs/generated/results.md` was identical to the
+  committed one except its provenance line (result directory, commit and run time).
 
 ## Security and privacy reviewer
 
