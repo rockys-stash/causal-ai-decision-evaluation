@@ -15,7 +15,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("data", help="download the three datasets and check their SHA-256")
     sub.add_parser("bank", help="fit and calibrate the AI per domain and draw the task bank (data/bank/)")
     s = sub.add_parser("simulate", help="simulated dry run through the API (data/sessions/simulated-<design>.jsonl)")
-    s.add_argument("design", choices=["planted", "null"])
+    s.add_argument("design", choices=["planted", "no_effect"])
     m = sub.add_parser("models", help="download the local models and check their SHA-256")
     m.add_argument("--quiet", action="store_true")
     pl = sub.add_parser("pilot", help="model-participant pilot through the API (resumable; hours on CPU)")

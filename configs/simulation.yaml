@@ -10,18 +10,18 @@
 # Time per decision (s): lognormal with the arm's median and a common spread.
 designs:
   planted:
-    skill: 0.55
-    shared: 0.6
+    skill: 0.3
+    shared: 0.25
     noise: 1.0
-    switch_b: 0.45
-    c0: -1.2
+    switch_b: 0.5
+    c0: -1.0
     c1: 14.0
     confidence_noise: 8
     seconds_median: {A: 14.0, B: 12.0, C: 18.0}
     seconds_sigma: 0.45
-  null:
-    skill: 0.55
-    shared: 0.6
+  no_effect:
+    skill: 0.3
+    shared: 0.25
     noise: 1.0
     switch_b: 0.0
     c0: -50.0
@@ -30,6 +30,6 @@ designs:
     seconds_median: {A: 14.0, B: 14.0, C: 14.0}
     seconds_sigma: 0.45
 per_arm: 60          # end-to-end dry run through the API, per design
-null_repetitions: 500
+no_effect_repetitions: 500
 power_per_arm: [10, 20, 30, 40, 60, 80, 120]
 power_repetitions: 300
