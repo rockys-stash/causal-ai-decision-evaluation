@@ -77,3 +77,13 @@ simulated power curve (A2). No result is described as a human result.
 **D14. Code formatting during the pilot.** `ruff format` and type annotations were applied while the
 pilot was running (commit `646bb06`). They change layout and type hints only; the running process
 had loaded the earlier code, and the tests pass on both.
+
+**D15. Subgroup gaps reported as pre-registered, with how to read them.** The pre-registered gap is
+a raw difference in error rates. Each participant sees a random sample of cases, so the outcome mix
+of a subgroup differs between arms, and a participant who leans towards one answer makes more
+errors in whichever subgroup has more cases of the other outcome. In the model pilot, arm A's model
+participants chose "reduce" for 82–92% of credit-limit cases, and the men in arm A's samples had
+mostly paid (20% defaulted): that, not the sex of the customer (which is never shown), makes the
+large arm-A gap. The report says so next to the table. For the human study, gaps in
+false-positive and false-negative rates within outcome will be reported as an exploratory
+addition, recorded with A2's analysis unchanged.

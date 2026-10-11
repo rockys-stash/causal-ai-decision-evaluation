@@ -1,0 +1,427 @@
+{
+ "simulated-planted": {
+  "label": "Simulated participants, planted effects (dry run)",
+  "kind": "simulated",
+  "status": "complete",
+  "file": "data/sessions/simulated-planted.jsonl",
+  "sessions": 180,
+  "participants": 180,
+  "decisions": 4320,
+  "missing_decisions": 0,
+  "excluded": [],
+  "chain_ok": true,
+  "chain": "14580 events, chain intact",
+  "models": [],
+  "arms": [
+   {
+    "arm": "A",
+    "participants": 60,
+    "accuracy": 0.68125,
+    "accuracy_sd": 0.113482,
+    "cost": 0.775,
+    "median_seconds": 13.683085,
+    "agree": 0.629861,
+    "agree_right": 0.722298,
+    "agree_wrong": 0.406311,
+    "appropriate": 0.315987,
+    "brier": 0.222583,
+    "confidence": 70.013194,
+    "ai_accuracy": 0.701389,
+    "ai_cost": 0.7875
+   },
+   {
+    "arm": "B",
+    "participants": 60,
+    "accuracy": 0.657639,
+    "accuracy_sd": 0.10352,
+    "cost": 0.865278,
+    "median_seconds": 12.081799,
+    "agree": 0.824306,
+    "agree_right": 0.85219,
+    "agree_wrong": 0.75862,
+    "appropriate": 0.093571,
+    "brier": 0.22451,
+    "confidence": 69.134722,
+    "ai_accuracy": 0.681944,
+    "ai_cost": 0.8125
+   },
+   {
+    "arm": "C",
+    "participants": 60,
+    "accuracy": 0.690278,
+    "accuracy_sd": 0.076085,
+    "cost": 0.754167,
+    "median_seconds": 17.864387,
+    "agree": 0.879861,
+    "agree_right": 0.91022,
+    "agree_wrong": 0.814409,
+    "appropriate": 0.095811,
+    "brier": 0.210822,
+    "confidence": 69.78125,
+    "ai_accuracy": 0.697917,
+    "ai_cost": 0.765972
+   }
+  ],
+  "primary": [
+   {
+    "contrast": "C−A",
+    "outcome": "accuracy",
+    "mean_a": 0.68125,
+    "mean_b": 0.690278,
+    "n_a": 60,
+    "n_b": 60,
+    "diff": 0.009028,
+    "ci": [
+     -0.025694,
+     0.043056
+    ],
+    "p": 0.639536,
+    "p_holm": 0.639536,
+    "cohens_h": 0.019448,
+    "error_reduction": 0.028322
+   },
+   {
+    "contrast": "B−A",
+    "outcome": "accuracy",
+    "mean_a": 0.68125,
+    "mean_b": 0.657639,
+    "n_a": 60,
+    "n_b": 60,
+    "diff": -0.023611,
+    "ci": [
+     -0.060434,
+     0.014583
+    ],
+    "p": 0.244176,
+    "p_holm": 0.488351,
+    "cohens_h": -0.0502,
+    "error_reduction": -0.074074
+   },
+   {
+    "contrast": "C−B",
+    "outcome": "accuracy",
+    "mean_a": 0.657639,
+    "mean_b": 0.690278,
+    "n_a": 60,
+    "n_b": 60,
+    "diff": 0.032639,
+    "ci": [
+     0.001389,
+     0.065278
+    ],
+    "p": 0.058494,
+    "p_holm": 0.175482,
+    "cohens_h": 0.069648,
+    "error_reduction": 0.095335
+   }
+  ],
+  "gee": {
+   "B_vs_A": {
+    "odds_ratio": 0.898678,
+    "ci": [
+     0.754572,
+     1.070305
+    ],
+    "p": 0.230906
+   },
+   "C_vs_A": {
+    "odds_ratio": 1.042753,
+    "ci": [
+     0.889699,
+     1.222136
+    ],
+    "p": 0.605221
+   }
+  }
+ },
+ "simulated-no_effect": {
+  "label": "Simulated participants, no effect (dry run)",
+  "kind": "simulated",
+  "status": "complete",
+  "file": "data/sessions/simulated-no_effect.jsonl",
+  "sessions": 180,
+  "participants": 180,
+  "decisions": 4320,
+  "missing_decisions": 0,
+  "excluded": [],
+  "chain_ok": true,
+  "chain": "14580 events, chain intact",
+  "models": [],
+  "arms": [
+   {
+    "arm": "A",
+    "participants": 60,
+    "accuracy": 0.656944,
+    "accuracy_sd": 0.084861,
+    "cost": 0.842361,
+    "median_seconds": 13.853229,
+    "agree": 0.630556,
+    "agree_right": 0.706756,
+    "agree_wrong": 0.466767,
+    "appropriate": 0.239989,
+    "brier": 0.22305,
+    "confidence": 69.498611,
+    "ai_accuracy": 0.701389,
+    "ai_cost": 0.7875
+   },
+   {
+    "arm": "B",
+    "participants": 60,
+    "accuracy": 0.640278,
+    "accuracy_sd": 0.095499,
+    "cost": 0.913889,
+    "median_seconds": 14.28557,
+    "agree": 0.616667,
+    "agree_right": 0.687399,
+    "agree_wrong": 0.475613,
+    "appropriate": 0.211787,
+    "brier": 0.232589,
+    "confidence": 69.556944,
+    "ai_accuracy": 0.681944,
+    "ai_cost": 0.8125
+   },
+   {
+    "arm": "C",
+    "participants": 60,
+    "accuracy": 0.654861,
+    "accuracy_sd": 0.087835,
+    "cost": 0.813889,
+    "median_seconds": 13.930588,
+    "agree": 0.622222,
+    "agree_right": 0.69601,
+    "agree_wrong": 0.448574,
+    "appropriate": 0.247436,
+    "brier": 0.22238,
+    "confidence": 69.598611,
+    "ai_accuracy": 0.697917,
+    "ai_cost": 0.765972
+   }
+  ],
+  "primary": [
+   {
+    "contrast": "C−A",
+    "outcome": "accuracy",
+    "mean_a": 0.656944,
+    "mean_b": 0.654861,
+    "n_a": 60,
+    "n_b": 60,
+    "diff": -0.002083,
+    "ci": [
+     -0.032639,
+     0.027778
+    ],
+    "p": 0.931107,
+    "p_holm": 1.0,
+    "cohens_h": -0.004385,
+    "error_reduction": -0.006073
+   },
+   {
+    "contrast": "B−A",
+    "outcome": "accuracy",
+    "mean_a": 0.656944,
+    "mean_b": 0.640278,
+    "n_a": 60,
+    "n_b": 60,
+    "diff": -0.016667,
+    "ci": [
+     -0.049306,
+     0.015278
+    ],
+    "p": 0.336066,
+    "p_holm": 1.0,
+    "cohens_h": -0.034913,
+    "error_reduction": -0.048583
+   },
+   {
+    "contrast": "C−B",
+    "outcome": "accuracy",
+    "mean_a": 0.640278,
+    "mean_b": 0.654861,
+    "n_a": 60,
+    "n_b": 60,
+    "diff": 0.014583,
+    "ci": [
+     -0.016667,
+     0.047222
+    ],
+    "p": 0.411259,
+    "p_holm": 1.0,
+    "cohens_h": 0.030528,
+    "error_reduction": 0.040541
+   }
+  ],
+  "gee": {
+   "B_vs_A": {
+    "odds_ratio": 0.929501,
+    "ci": [
+     0.807595,
+     1.069809
+    ],
+    "p": 0.308104
+   },
+   "C_vs_A": {
+    "odds_ratio": 0.99074,
+    "ci": [
+     0.864911,
+     1.134875
+    ],
+    "p": 0.893205
+   }
+  }
+ },
+ "model": {
+  "label": "Model participants (pilot; not people)",
+  "kind": "model",
+  "status": "complete",
+  "file": "data/sessions/model-pilot.jsonl",
+  "sessions": 36,
+  "participants": 36,
+  "decisions": 864,
+  "missing_decisions": 0,
+  "excluded": [],
+  "chain_ok": true,
+  "chain": "2916 events, chain intact",
+  "models": [
+   "phi-4-mini",
+   "qwen3-4b"
+  ],
+  "arms": [
+   {
+    "arm": "A",
+    "participants": 12,
+    "accuracy": 0.548611,
+    "accuracy_sd": 0.072894,
+    "cost": 0.888889,
+    "median_seconds": 6.203276,
+    "agree": 0.545139,
+    "agree_right": 0.565285,
+    "agree_wrong": 0.485528,
+    "appropriate": 0.079756,
+    "brier": 0.362925,
+    "confidence": 88.107639,
+    "ai_accuracy": 0.677083,
+    "ai_cost": 0.784722
+   },
+   {
+    "arm": "B",
+    "participants": 12,
+    "accuracy": 0.541667,
+    "accuracy_sd": 0.113763,
+    "cost": 0.996528,
+    "median_seconds": 6.540257,
+    "agree": 0.673611,
+    "agree_right": 0.648997,
+    "agree_wrong": 0.697114,
+    "appropriate": -0.048117,
+    "brier": 0.366181,
+    "confidence": 89.305556,
+    "ai_accuracy": 0.680556,
+    "ai_cost": 0.864583
+   },
+   {
+    "arm": "C",
+    "participants": 12,
+    "accuracy": 0.586806,
+    "accuracy_sd": 0.076331,
+    "cost": 0.895833,
+    "median_seconds": 8.49793,
+    "agree": 0.760417,
+    "agree_right": 0.7484,
+    "agree_wrong": 0.787731,
+    "appropriate": -0.039332,
+    "brier": 0.286443,
+    "confidence": 81.829861,
+    "ai_accuracy": 0.701389,
+    "ai_cost": 0.739583
+   }
+  ],
+  "primary": [
+   {
+    "contrast": "C−A",
+    "outcome": "accuracy",
+    "mean_a": 0.548611,
+    "mean_b": 0.586806,
+    "n_a": 12,
+    "n_b": 12,
+    "diff": 0.038194,
+    "ci": [
+     -0.020833,
+     0.09375
+    ],
+    "p": 0.212879,
+    "p_holm": 0.638636,
+    "cohens_h": 0.077119,
+    "error_reduction": 0.084615
+   },
+   {
+    "contrast": "B−A",
+    "outcome": "accuracy",
+    "mean_a": 0.548611,
+    "mean_b": 0.541667,
+    "n_a": 12,
+    "n_b": 12,
+    "diff": -0.006944,
+    "ci": [
+     -0.079948,
+     0.065972
+    ],
+    "p": 0.921908,
+    "p_holm": 0.921908,
+    "cohens_h": -0.013946,
+    "error_reduction": -0.015385
+   },
+   {
+    "contrast": "C−B",
+    "outcome": "accuracy",
+    "mean_a": 0.541667,
+    "mean_b": 0.586806,
+    "n_a": 12,
+    "n_b": 12,
+    "diff": 0.045139,
+    "ci": [
+     -0.03125,
+     0.118056
+    ],
+    "p": 0.215378,
+    "p_holm": 0.638636,
+    "cohens_h": 0.091065,
+    "error_reduction": 0.098485
+   }
+  ],
+  "gee": {
+   "B_vs_A": {
+    "odds_ratio": 0.972251,
+    "ci": [
+     0.74146,
+     1.274879
+    ],
+    "p": 0.838718
+   },
+   "C_vs_A": {
+    "odds_ratio": 1.170766,
+    "ci": [
+     0.955952,
+     1.433851
+    ],
+    "p": 0.127408
+   }
+  }
+ },
+ "human": {
+  "label": "Human participants",
+  "kind": "human",
+  "status": "pending",
+  "file": "data/sessions/human.jsonl",
+  "sessions": 0,
+  "participants": 0,
+  "decisions": null,
+  "missing_decisions": null,
+  "excluded": null,
+  "chain_ok": null,
+  "chain": null,
+  "models": null,
+  "arms": null,
+  "primary": null,
+  "gee": null
+ }
+}

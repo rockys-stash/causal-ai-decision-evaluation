@@ -89,3 +89,13 @@ effect says how those models used the AI; it is not evidence about people.
 arm per model (18 per model, 36 in all, 864 analysed decisions) instead of 5. With blocks of 6,
 5 per arm cannot be reached with balanced arms; three complete blocks per model can. The
 model-participant answer format is fixed as JSON with the decision and an integer confidence.
+
+**A2 (2026-10-11, before any human session).** Human sample size: **60 participants per arm (180
+in all, 4,320 scored decisions)**, after exclusions. Set by the pre-registered rule from the
+simulated power analysis in `results/20261011T024226Z-d5953e1` (power for a 6-point accuracy
+difference: 63% at 40 per arm, 86% at 60). Recruitment continues until 60 complete, non-excluded
+sessions per arm; with blocked allocation, the last block is completed. The same analysis applies
+unchanged. Caveat recorded with the amendment: the power analysis rests on simulated participants
+whose skill and spread are assumptions; if the first 30 human participants' accuracy SD, pooled
+across arms without looking at arm differences, exceeds the simulated 8–11 points, the size will
+be re-derived from it and recorded as A3; no arm comparison is computed before the final size.

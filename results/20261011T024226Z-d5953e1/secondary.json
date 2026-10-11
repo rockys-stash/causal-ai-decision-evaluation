@@ -1,0 +1,1062 @@
+{
+ "simulated-planted": [
+  {
+   "contrast": "C−A",
+   "outcome": "cost",
+   "mean_a": 0.775,
+   "mean_b": 0.754167,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.020833,
+   "ci": [
+    -0.115278,
+    0.075
+   ],
+   "p": 0.675932,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "cost",
+   "mean_a": 0.775,
+   "mean_b": 0.865278,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.090278,
+   "ci": [
+    -0.016667,
+    0.195139
+   ],
+   "p": 0.107889,
+   "p_holm": 0.971003
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "cost",
+   "mean_a": 0.865278,
+   "mean_b": 0.754167,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.111111,
+   "ci": [
+    -0.206944,
+    -0.018056
+   ],
+   "p": 0.023998,
+   "p_holm": 0.275972
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "log_seconds",
+   "mean_a": 2.61616,
+   "mean_b": 2.882809,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.266649,
+   "ci": [
+    0.235272,
+    0.297948
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "log_seconds",
+   "mean_a": 2.61616,
+   "mean_b": 2.4917,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.12446,
+   "ci": [
+    -0.15431,
+    -0.093693
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "log_seconds",
+   "mean_a": 2.4917,
+   "mean_b": 2.882809,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.391109,
+   "ci": [
+    0.360913,
+    0.421182
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "override",
+   "mean_a": 0.175694,
+   "mean_b": 0.120139,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.055556,
+   "ci": [
+    -0.08125,
+    -0.030556
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "appropriate",
+   "mean_a": 0.315987,
+   "mean_b": 0.095811,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.220175,
+   "ci": [
+    -0.292615,
+    -0.145284
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "appropriate",
+   "mean_a": 0.315987,
+   "mean_b": 0.093571,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.222416,
+   "ci": [
+    -0.298202,
+    -0.14201
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "appropriate",
+   "mean_a": 0.093571,
+   "mean_b": 0.095811,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.002241,
+   "ci": [
+    -0.058144,
+    0.06054
+   ],
+   "p": 0.942606,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "brier",
+   "mean_a": 0.222583,
+   "mean_b": 0.210822,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.011761,
+   "ci": [
+    -0.026546,
+    0.002538
+   ],
+   "p": 0.121088,
+   "p_holm": 0.971003
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "brier",
+   "mean_a": 0.222583,
+   "mean_b": 0.22451,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.001927,
+   "ci": [
+    -0.014278,
+    0.018234
+   ],
+   "p": 0.817118,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "brier",
+   "mean_a": 0.22451,
+   "mean_b": 0.210822,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.013688,
+   "ci": [
+    -0.027025,
+    -0.000613
+   ],
+   "p": 0.045695,
+   "p_holm": 0.456954
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.003776,
+   "p": 0.962304,
+   "arm_a": {
+    "error_1": 0.39726,
+    "error_2": 0.314496,
+    "gap": 0.082764,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.364865,
+    "error_2": 0.278325,
+    "gap": 0.08654,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": -0.20809,
+   "p": 0.022998,
+   "arm_a": {
+    "error_1": 0.39726,
+    "error_2": 0.314496,
+    "gap": 0.082764,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.223684,
+    "error_2": 0.34901,
+    "gap": -0.125326,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "p_holm": 0.275972
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.211865,
+   "p": 0.007699,
+   "arm_a": {
+    "error_1": 0.223684,
+    "error_2": 0.34901,
+    "gap": -0.125326,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "arm_b": {
+    "error_1": 0.364865,
+    "error_2": 0.278325,
+    "gap": 0.08654,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 0.10009
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.024212,
+   "p": 0.682232,
+   "arm_a": {
+    "error_1": 0.304833,
+    "error_2": 0.317536,
+    "gap": -0.012703,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.300725,
+    "error_2": 0.289216,
+    "gap": 0.011509,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": -0.028021,
+   "p": 0.60324,
+   "arm_a": {
+    "error_1": 0.304833,
+    "error_2": 0.317536,
+    "gap": -0.012703,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.319853,
+    "error_2": 0.360577,
+    "gap": -0.040724,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.052233,
+   "p": 0.350465,
+   "arm_a": {
+    "error_1": 0.319853,
+    "error_2": 0.360577,
+    "gap": -0.040724,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "arm_b": {
+    "error_1": 0.300725,
+    "error_2": 0.289216,
+    "gap": 0.011509,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  }
+ ],
+ "simulated-no_effect": [
+  {
+   "contrast": "C−A",
+   "outcome": "cost",
+   "mean_a": 0.842361,
+   "mean_b": 0.813889,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.028472,
+   "ci": [
+    -0.122917,
+    0.067361
+   ],
+   "p": 0.562044,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "cost",
+   "mean_a": 0.842361,
+   "mean_b": 0.913889,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.071528,
+   "ci": [
+    -0.019462,
+    0.169462
+   ],
+   "p": 0.153985,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "cost",
+   "mean_a": 0.913889,
+   "mean_b": 0.813889,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.1,
+   "ci": [
+    -0.194444,
+    -0.008333
+   ],
+   "p": 0.040896,
+   "p_holm": 0.777022
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "log_seconds",
+   "mean_a": 2.628518,
+   "mean_b": 2.634087,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.005569,
+   "ci": [
+    -0.026641,
+    0.037586
+   ],
+   "p": 0.741826,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "log_seconds",
+   "mean_a": 2.628518,
+   "mean_b": 2.65925,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.030732,
+   "ci": [
+    -0.002411,
+    0.062117
+   ],
+   "p": 0.066593,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "log_seconds",
+   "mean_a": 2.65925,
+   "mean_b": 2.634087,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.025163,
+   "ci": [
+    -0.056139,
+    0.00615
+   ],
+   "p": 0.123588,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "override",
+   "mean_a": 0.383333,
+   "mean_b": 0.377778,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.005556,
+   "ci": [
+    -0.04375,
+    0.036111
+   ],
+   "p": 0.809419,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "appropriate",
+   "mean_a": 0.239989,
+   "mean_b": 0.247436,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.007447,
+   "ci": [
+    -0.061082,
+    0.076829
+   ],
+   "p": 0.840416,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "appropriate",
+   "mean_a": 0.239989,
+   "mean_b": 0.211787,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.028202,
+   "ci": [
+    -0.106112,
+    0.051472
+   ],
+   "p": 0.480852,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "appropriate",
+   "mean_a": 0.211787,
+   "mean_b": 0.247436,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.035649,
+   "ci": [
+    -0.032618,
+    0.103525
+   ],
+   "p": 0.324768,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "brier",
+   "mean_a": 0.22305,
+   "mean_b": 0.22238,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.000669,
+   "ci": [
+    -0.014054,
+    0.012441
+   ],
+   "p": 0.918108,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "brier",
+   "mean_a": 0.22305,
+   "mean_b": 0.232589,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": 0.009539,
+   "ci": [
+    -0.003862,
+    0.023122
+   ],
+   "p": 0.173383,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "brier",
+   "mean_a": 0.232589,
+   "mean_b": 0.22238,
+   "n_a": 60,
+   "n_b": 60,
+   "diff": -0.010209,
+   "ci": [
+    -0.024912,
+    0.004043
+   ],
+   "p": 0.182282,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.119893,
+   "p": 0.154285,
+   "arm_a": {
+    "error_1": 0.246575,
+    "error_2": 0.375921,
+    "gap": -0.129346,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.337838,
+    "error_2": 0.347291,
+    "gap": -0.009453,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.111628,
+   "p": 0.183182,
+   "arm_a": {
+    "error_1": 0.246575,
+    "error_2": 0.375921,
+    "gap": -0.129346,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.368421,
+    "error_2": 0.386139,
+    "gap": -0.017718,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.008265,
+   "p": 0.919508,
+   "arm_a": {
+    "error_1": 0.368421,
+    "error_2": 0.386139,
+    "gap": -0.017718,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "arm_b": {
+    "error_1": 0.337838,
+    "error_2": 0.347291,
+    "gap": -0.009453,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.069106,
+   "p": 0.215978,
+   "arm_a": {
+    "error_1": 0.29368,
+    "error_2": 0.383886,
+    "gap": -0.090206,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.351449,
+    "error_2": 0.372549,
+    "gap": -0.0211,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.049199,
+   "p": 0.361364,
+   "arm_a": {
+    "error_1": 0.29368,
+    "error_2": 0.383886,
+    "gap": -0.090206,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.305147,
+    "error_2": 0.346154,
+    "gap": -0.041007,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.019907,
+   "p": 0.719528,
+   "arm_a": {
+    "error_1": 0.305147,
+    "error_2": 0.346154,
+    "gap": -0.041007,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "arm_b": {
+    "error_1": 0.351449,
+    "error_2": 0.372549,
+    "gap": -0.0211,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  }
+ ],
+ "model": [
+  {
+   "contrast": "C−A",
+   "outcome": "cost",
+   "mean_a": 0.888889,
+   "mean_b": 0.895833,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": 0.006944,
+   "ci": [
+    -0.135417,
+    0.15625
+   ],
+   "p": 0.964804,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "cost",
+   "mean_a": 0.888889,
+   "mean_b": 0.996528,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": 0.107639,
+   "ci": [
+    -0.083333,
+    0.28125
+   ],
+   "p": 0.285071,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "cost",
+   "mean_a": 0.996528,
+   "mean_b": 0.895833,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": -0.100694,
+   "ci": [
+    -0.277778,
+    0.083333
+   ],
+   "p": 0.310669,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "log_seconds",
+   "mean_a": 1.825078,
+   "mean_b": 2.139823,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": 0.314745,
+   "ci": [
+    0.280052,
+    0.35173
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "log_seconds",
+   "mean_a": 1.825078,
+   "mean_b": 1.877977,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": 0.052899,
+   "ci": [
+    0.020132,
+    0.08587
+   ],
+   "p": 0.0032,
+   "p_holm": 0.047995
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "log_seconds",
+   "mean_a": 1.877977,
+   "mean_b": 2.139823,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": 0.261846,
+   "ci": [
+    0.230099,
+    0.295759
+   ],
+   "p": 0.0001,
+   "p_holm": 0.0019
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "override",
+   "mean_a": 0.326389,
+   "mean_b": 0.239583,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": -0.086806,
+   "ci": [
+    -0.229167,
+    0.055642
+   ],
+   "p": 0.007299,
+   "p_holm": 0.094891
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "appropriate",
+   "mean_a": 0.079756,
+   "mean_b": -0.039332,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": -0.119088,
+   "ci": [
+    -0.24597,
+    0.011865
+   ],
+   "p": 0.10169,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "appropriate",
+   "mean_a": 0.079756,
+   "mean_b": -0.048117,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": -0.127873,
+   "ci": [
+    -0.263977,
+    0.011645
+   ],
+   "p": 0.10099,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "appropriate",
+   "mean_a": -0.048117,
+   "mean_b": -0.039332,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": 0.008786,
+   "ci": [
+    -0.11363,
+    0.129615
+   ],
+   "p": 0.887611,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "brier",
+   "mean_a": 0.362925,
+   "mean_b": 0.286443,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": -0.076483,
+   "ci": [
+    -0.11346,
+    -0.041369
+   ],
+   "p": 0.0005,
+   "p_holm": 0.008499
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "brier",
+   "mean_a": 0.362925,
+   "mean_b": 0.366181,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": 0.003255,
+   "ci": [
+    -0.04757,
+    0.055235
+   ],
+   "p": 0.910209,
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "brier",
+   "mean_a": 0.366181,
+   "mean_b": 0.286443,
+   "n_a": 12,
+   "n_b": 12,
+   "diff": -0.079738,
+   "ci": [
+    -0.126235,
+    -0.035562
+   ],
+   "p": 0.0042,
+   "p_holm": 0.058794
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": -0.009818,
+   "p": 0.945305,
+   "arm_a": {
+    "error_1": 0.636364,
+    "error_2": 0.447059,
+    "gap": 0.189305,
+    "n_1": 11,
+    "n_2": 85
+   },
+   "arm_b": {
+    "error_1": 0.5,
+    "error_2": 0.320513,
+    "gap": 0.179487,
+    "n_1": 18,
+    "n_2": 78
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": -0.176805,
+   "p": 0.40346,
+   "arm_a": {
+    "error_1": 0.636364,
+    "error_2": 0.447059,
+    "gap": 0.189305,
+    "n_1": 11,
+    "n_2": 85
+   },
+   "arm_b": {
+    "error_1": 0.4375,
+    "error_2": 0.425,
+    "gap": 0.0125,
+    "n_1": 16,
+    "n_2": 80
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.166987,
+   "p": 0.382462,
+   "arm_a": {
+    "error_1": 0.4375,
+    "error_2": 0.425,
+    "gap": 0.0125,
+    "n_1": 16,
+    "n_2": 80
+   },
+   "arm_b": {
+    "error_1": 0.5,
+    "error_2": 0.320513,
+    "gap": 0.179487,
+    "n_1": 18,
+    "n_2": 78
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.573008,
+   "p": 0.0005,
+   "arm_a": {
+    "error_1": 0.295775,
+    "error_2": 0.8,
+    "gap": -0.504225,
+    "n_1": 71,
+    "n_2": 25
+   },
+   "arm_b": {
+    "error_1": 0.425926,
+    "error_2": 0.357143,
+    "gap": 0.068783,
+    "n_1": 54,
+    "n_2": 42
+   },
+   "p_holm": 0.008499
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.333536,
+   "p": 0.014299,
+   "arm_a": {
+    "error_1": 0.295775,
+    "error_2": 0.8,
+    "gap": -0.504225,
+    "n_1": 71,
+    "n_2": 25
+   },
+   "arm_b": {
+    "error_1": 0.433962,
+    "error_2": 0.604651,
+    "gap": -0.170689,
+    "n_1": 53,
+    "n_2": 43
+   },
+   "p_holm": 0.171583
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.239472,
+   "p": 0.066993,
+   "arm_a": {
+    "error_1": 0.433962,
+    "error_2": 0.604651,
+    "gap": -0.170689,
+    "n_1": 53,
+    "n_2": 43
+   },
+   "arm_b": {
+    "error_1": 0.425926,
+    "error_2": 0.357143,
+    "gap": 0.068783,
+    "n_1": 54,
+    "n_2": 42
+   },
+   "p_holm": 0.736926
+  }
+ ],
+ "human": null
+}

@@ -1,0 +1,477 @@
+{
+ "simulated-planted": [
+  {
+   "contrast": "C−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.003776,
+   "p": 0.962304,
+   "arm_a": {
+    "error_1": 0.39726,
+    "error_2": 0.314496,
+    "gap": 0.082764,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.364865,
+    "error_2": 0.278325,
+    "gap": 0.08654,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": -0.20809,
+   "p": 0.022998,
+   "arm_a": {
+    "error_1": 0.39726,
+    "error_2": 0.314496,
+    "gap": 0.082764,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.223684,
+    "error_2": 0.34901,
+    "gap": -0.125326,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "p_holm": 0.275972
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.211865,
+   "p": 0.007699,
+   "arm_a": {
+    "error_1": 0.223684,
+    "error_2": 0.34901,
+    "gap": -0.125326,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "arm_b": {
+    "error_1": 0.364865,
+    "error_2": 0.278325,
+    "gap": 0.08654,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 0.10009
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.024212,
+   "p": 0.682232,
+   "arm_a": {
+    "error_1": 0.304833,
+    "error_2": 0.317536,
+    "gap": -0.012703,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.300725,
+    "error_2": 0.289216,
+    "gap": 0.011509,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": -0.028021,
+   "p": 0.60324,
+   "arm_a": {
+    "error_1": 0.304833,
+    "error_2": 0.317536,
+    "gap": -0.012703,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.319853,
+    "error_2": 0.360577,
+    "gap": -0.040724,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.052233,
+   "p": 0.350465,
+   "arm_a": {
+    "error_1": 0.319853,
+    "error_2": 0.360577,
+    "gap": -0.040724,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "arm_b": {
+    "error_1": 0.300725,
+    "error_2": 0.289216,
+    "gap": 0.011509,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  }
+ ],
+ "simulated-no_effect": [
+  {
+   "contrast": "C−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.119893,
+   "p": 0.154285,
+   "arm_a": {
+    "error_1": 0.246575,
+    "error_2": 0.375921,
+    "gap": -0.129346,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.337838,
+    "error_2": 0.347291,
+    "gap": -0.009453,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.111628,
+   "p": 0.183182,
+   "arm_a": {
+    "error_1": 0.246575,
+    "error_2": 0.375921,
+    "gap": -0.129346,
+    "n_1": 73,
+    "n_2": 407
+   },
+   "arm_b": {
+    "error_1": 0.368421,
+    "error_2": 0.386139,
+    "gap": -0.017718,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.008265,
+   "p": 0.919508,
+   "arm_a": {
+    "error_1": 0.368421,
+    "error_2": 0.386139,
+    "gap": -0.017718,
+    "n_1": 76,
+    "n_2": 404
+   },
+   "arm_b": {
+    "error_1": 0.337838,
+    "error_2": 0.347291,
+    "gap": -0.009453,
+    "n_1": 74,
+    "n_2": 406
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.069106,
+   "p": 0.215978,
+   "arm_a": {
+    "error_1": 0.29368,
+    "error_2": 0.383886,
+    "gap": -0.090206,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.351449,
+    "error_2": 0.372549,
+    "gap": -0.0211,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.049199,
+   "p": 0.361364,
+   "arm_a": {
+    "error_1": 0.29368,
+    "error_2": 0.383886,
+    "gap": -0.090206,
+    "n_1": 269,
+    "n_2": 211
+   },
+   "arm_b": {
+    "error_1": 0.305147,
+    "error_2": 0.346154,
+    "gap": -0.041007,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.019907,
+   "p": 0.719528,
+   "arm_a": {
+    "error_1": 0.305147,
+    "error_2": 0.346154,
+    "gap": -0.041007,
+    "n_1": 272,
+    "n_2": 208
+   },
+   "arm_b": {
+    "error_1": 0.351449,
+    "error_2": 0.372549,
+    "gap": -0.0211,
+    "n_1": 276,
+    "n_2": 204
+   },
+   "p_holm": 1.0
+  }
+ ],
+ "model": [
+  {
+   "contrast": "C−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": -0.009818,
+   "p": 0.945305,
+   "arm_a": {
+    "error_1": 0.636364,
+    "error_2": 0.447059,
+    "gap": 0.189305,
+    "n_1": 11,
+    "n_2": 85
+   },
+   "arm_b": {
+    "error_1": 0.5,
+    "error_2": 0.320513,
+    "gap": 0.179487,
+    "n_1": 18,
+    "n_2": 78
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": -0.176805,
+   "p": 0.40346,
+   "arm_a": {
+    "error_1": 0.636364,
+    "error_2": 0.447059,
+    "gap": 0.189305,
+    "n_1": 11,
+    "n_2": 85
+   },
+   "arm_b": {
+    "error_1": 0.4375,
+    "error_2": 0.425,
+    "gap": 0.0125,
+    "n_1": 16,
+    "n_2": 80
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_loan",
+   "domain": "loan",
+   "groups": [
+    "under 25",
+    "25 and over"
+   ],
+   "diff": 0.166987,
+   "p": 0.382462,
+   "arm_a": {
+    "error_1": 0.4375,
+    "error_2": 0.425,
+    "gap": 0.0125,
+    "n_1": 16,
+    "n_2": 80
+   },
+   "arm_b": {
+    "error_1": 0.5,
+    "error_2": 0.320513,
+    "gap": 0.179487,
+    "n_1": 18,
+    "n_2": 78
+   },
+   "p_holm": 1.0
+  },
+  {
+   "contrast": "C−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.573008,
+   "p": 0.0005,
+   "arm_a": {
+    "error_1": 0.295775,
+    "error_2": 0.8,
+    "gap": -0.504225,
+    "n_1": 71,
+    "n_2": 25
+   },
+   "arm_b": {
+    "error_1": 0.425926,
+    "error_2": 0.357143,
+    "gap": 0.068783,
+    "n_1": 54,
+    "n_2": 42
+   },
+   "p_holm": 0.008499
+  },
+  {
+   "contrast": "B−A",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.333536,
+   "p": 0.014299,
+   "arm_a": {
+    "error_1": 0.295775,
+    "error_2": 0.8,
+    "gap": -0.504225,
+    "n_1": 71,
+    "n_2": 25
+   },
+   "arm_b": {
+    "error_1": 0.433962,
+    "error_2": 0.604651,
+    "gap": -0.170689,
+    "n_1": 53,
+    "n_2": 43
+   },
+   "p_holm": 0.171583
+  },
+  {
+   "contrast": "C−B",
+   "outcome": "gap_credit_limit",
+   "domain": "credit_limit",
+   "groups": [
+    "female",
+    "male"
+   ],
+   "diff": 0.239472,
+   "p": 0.066993,
+   "arm_a": {
+    "error_1": 0.433962,
+    "error_2": 0.604651,
+    "gap": -0.170689,
+    "n_1": 53,
+    "n_2": 43
+   },
+   "arm_b": {
+    "error_1": 0.425926,
+    "error_2": 0.357143,
+    "gap": 0.068783,
+    "n_1": 54,
+    "n_2": 42
+   },
+   "p_holm": 0.736926
+  }
+ ],
+ "human": []
+}

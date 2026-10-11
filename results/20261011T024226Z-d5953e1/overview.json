@@ -1,0 +1,51 @@
+{
+ "populations": {
+  "simulated-planted": {
+   "label": "Simulated participants, planted effects (dry run)",
+   "kind": "simulated",
+   "status": "complete",
+   "sessions": 180,
+   "participants": 180,
+   "decisions": 4320,
+   "chain_ok": true,
+   "file": "data/sessions/simulated-planted.jsonl"
+  },
+  "simulated-no_effect": {
+   "label": "Simulated participants, no effect (dry run)",
+   "kind": "simulated",
+   "status": "complete",
+   "sessions": 180,
+   "participants": 180,
+   "decisions": 4320,
+   "chain_ok": true,
+   "file": "data/sessions/simulated-no_effect.jsonl"
+  },
+  "model": {
+   "label": "Model participants (pilot; not people)",
+   "kind": "model",
+   "status": "complete",
+   "sessions": 36,
+   "participants": 36,
+   "decisions": 864,
+   "chain_ok": true,
+   "file": "data/sessions/model-pilot.jsonl"
+  },
+  "human": {
+   "label": "Human participants",
+   "kind": "human",
+   "status": "pending",
+   "sessions": 0,
+   "participants": 0,
+   "decisions": null,
+   "chain_ok": null,
+   "file": "data/sessions/human.jsonl"
+  }
+ },
+ "human_study": "pending",
+ "arms": {
+  "A": "Human only",
+  "B": "AI recommendation",
+  "C": "AI with uncertainty and explanation"
+ },
+ "quick": false
+}

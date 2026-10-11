@@ -1,0 +1,114 @@
+{
+ "permutations_per_test": 1000,
+ "expected_accuracy": {
+  "planted": {
+   "A": 0.656379,
+   "B": 0.678921,
+   "C": 0.696875
+  },
+  "no_effect": {
+   "A": 0.6563,
+   "B": 0.657183,
+   "C": 0.657831
+  }
+ },
+ "type1": {
+  "per_arm": 60,
+  "repetitions": 500,
+  "any_contrast": 0.03,
+  "by_contrast": {
+   "C−A": 0.01,
+   "B−A": 0.012,
+   "C−B": 0.014
+  }
+ },
+ "curve": [
+  {
+   "per_arm": 10,
+   "repetitions": 300,
+   "C−A": 0.056667,
+   "B−A": 0.016667,
+   "C−B": 0.036667
+  },
+  {
+   "per_arm": 20,
+   "repetitions": 300,
+   "C−A": 0.156667,
+   "B−A": 0.056667,
+   "C−B": 0.053333
+  },
+  {
+   "per_arm": 30,
+   "repetitions": 300,
+   "C−A": 0.206667,
+   "B−A": 0.06,
+   "C−B": 0.046667
+  },
+  {
+   "per_arm": 40,
+   "repetitions": 300,
+   "C−A": 0.316667,
+   "B−A": 0.073333,
+   "C−B": 0.066667
+  },
+  {
+   "per_arm": 60,
+   "repetitions": 300,
+   "C−A": 0.406667,
+   "B−A": 0.103333,
+   "C−B": 0.083333
+  },
+  {
+   "per_arm": 80,
+   "repetitions": 300,
+   "C−A": 0.543333,
+   "B−A": 0.16,
+   "C−B": 0.11
+  },
+  {
+   "per_arm": 120,
+   "repetitions": 300,
+   "C−A": 0.8,
+   "B−A": 0.313333,
+   "C−B": 0.2
+  }
+ ],
+ "six_points": [
+  {
+   "per_arm": 10,
+   "repetitions": 300,
+   "power": 0.136667
+  },
+  {
+   "per_arm": 20,
+   "repetitions": 300,
+   "power": 0.276667
+  },
+  {
+   "per_arm": 30,
+   "repetitions": 300,
+   "power": 0.466667
+  },
+  {
+   "per_arm": 40,
+   "repetitions": 300,
+   "power": 0.63
+  },
+  {
+   "per_arm": 60,
+   "repetitions": 300,
+   "power": 0.863333
+  },
+  {
+   "per_arm": 80,
+   "repetitions": 300,
+   "power": 0.936667
+  },
+  {
+   "per_arm": 120,
+   "repetitions": 300,
+   "power": 0.993333
+  }
+ ],
+ "human_per_arm": 60
+}

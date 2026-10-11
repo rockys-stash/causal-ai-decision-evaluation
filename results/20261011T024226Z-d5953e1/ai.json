@@ -1,0 +1,327 @@
+{
+ "loan": {
+  "rows": 1000,
+  "base_rate": 0.7,
+  "split": [
+   600,
+   200,
+   200
+  ],
+  "test": {
+   "auroc": 0.788571,
+   "accuracy_balanced": 0.725,
+   "tpr": 0.65,
+   "tnr": 0.8,
+   "ece_balanced": 0.074356,
+   "brier_balanced": 0.186234,
+   "n": 200,
+   "positives": 140
+  },
+  "boosting_test_auroc": 0.795833,
+  "model": {
+   "c": 0.1,
+   "cv": [
+    {
+     "c": 0.01,
+     "log_loss": 0.551208,
+     "auroc": 0.761812
+    },
+    {
+     "c": 0.03,
+     "log_loss": 0.522171,
+     "auroc": 0.773558
+    },
+    {
+     "c": 0.1,
+     "log_loss": 0.507075,
+     "auroc": 0.774286
+    },
+    {
+     "c": 0.3,
+     "log_loss": 0.510717,
+     "auroc": 0.767857
+    },
+    {
+     "c": 1.0,
+     "log_loss": 0.522278,
+     "auroc": 0.760794
+    },
+    {
+     "c": 3.0,
+     "log_loss": 0.531954,
+     "auroc": 0.755066
+    }
+   ],
+   "platt": [
+    1.231279,
+    -0.225129
+   ],
+   "prior_logit": 0.847298,
+   "coefficients": {
+    "duration": -0.471088,
+    "age": 0.1656,
+    "existing_credits": -0.110868,
+    "amount": 0.07146,
+    "checking_200 DM or more": 0.107635,
+    "checking_no checking account": 0.764528,
+    "checking_overdrawn": -0.642795,
+    "checking_under 200 DM": -0.228896,
+    "purpose_business": 0.058572,
+    "purpose_domestic appliance": -0.060349,
+    "purpose_education": -0.12093,
+    "purpose_furniture or equipment": 0.071831,
+    "purpose_new car": -0.474908,
+    "purpose_other": 0.070969,
+    "purpose_radio or tv": 0.195029,
+    "purpose_repairs": -0.191428,
+    "purpose_retraining": 0.054354,
+    "purpose_used car": 0.397331,
+    "history_all credits at this bank paid back": -0.326584,
+    "history_critical account or credits elsewhere": 0.424681,
+    "history_existing credits paid on time": 0.049501,
+    "history_no credits taken, or all paid back": -0.176489,
+    "history_payments delayed in the past": 0.029363,
+    "savings_1,000 DM or more": 0.114908,
+    "savings_100–500 DM": -0.13743,
+    "savings_500–1,000 DM": 0.007843,
+    "savings_none known": 0.222056,
+    "savings_under 100 DM": -0.206904,
+    "employment_1–4 years": -0.075189,
+    "employment_4–7 years": 0.338554,
+    "employment_7 years or more": 0.179604,
+    "employment_under 1 year": -0.226841,
+    "employment_unemployed": -0.215657,
+    "housing_lives for free": 0.079625,
+    "housing_owns": 0.067824,
+    "housing_rents": -0.146977,
+    "job_highly qualified, self-employed or manager": 0.074197,
+    "job_skilled employee": -0.07389,
+    "job_unemployed or unskilled (non-resident)": -0.005007,
+    "job_unskilled": 0.005172,
+    "property_building society savings or life insurance": 0.046908,
+    "property_car or other": 0.055464,
+    "property_none known": -0.30744,
+    "property_real estate": 0.205539
+   }
+  },
+  "bank": {
+   "cases": 40,
+   "ai_accuracy": 0.725,
+   "ai_ece": 0.175538,
+   "auroc": 0.735
+  }
+ },
+ "marketing": {
+  "rows": 45211,
+  "base_rate": 0.116985,
+  "split": [
+   27126,
+   9042,
+   9043
+  ],
+  "test": {
+   "auroc": 0.740938,
+   "accuracy_balanced": 0.674476,
+   "tpr": 0.627599,
+   "tnr": 0.721353,
+   "ece_balanced": 0.030385,
+   "brier_balanced": 0.204984,
+   "n": 9043,
+   "positives": 1058
+  },
+  "boosting_test_auroc": 0.759839,
+  "model": {
+   "c": 0.1,
+   "cv": [
+    {
+     "c": 0.01,
+     "log_loss": 0.318934,
+     "auroc": 0.71879
+    },
+    {
+     "c": 0.03,
+     "log_loss": 0.317001,
+     "auroc": 0.718839
+    },
+    {
+     "c": 0.1,
+     "log_loss": 0.316633,
+     "auroc": 0.718365
+    },
+    {
+     "c": 0.3,
+     "log_loss": 0.316701,
+     "auroc": 0.717764
+    },
+    {
+     "c": 1.0,
+     "log_loss": 0.316741,
+     "auroc": 0.717508
+    },
+    {
+     "c": 3.0,
+     "log_loss": 0.316744,
+     "auroc": 0.717475
+    }
+   ],
+   "platt": [
+    0.964024,
+    -0.071013
+   ],
+   "prior_logit": -2.021327,
+   "coefficients": {
+    "age": 0.022946,
+    "balance": 0.054823,
+    "campaign": -0.321927,
+    "previous": 0.008215,
+    "job_admin": -0.042325,
+    "job_blue collar": -0.177365,
+    "job_entrepreneur": -0.35207,
+    "job_housemaid": -0.204352,
+    "job_management": -0.033713,
+    "job_retired": 0.456867,
+    "job_self employed": -0.109642,
+    "job_services": -0.204257,
+    "job_student": 0.472636,
+    "job_technician": -0.112834,
+    "job_unemployed": 0.113903,
+    "job_unknown": -0.255574,
+    "marital_divorced": -0.166548,
+    "marital_married": -0.299121,
+    "marital_single": 0.016945,
+    "education_primary": -0.282135,
+    "education_secondary": -0.127404,
+    "education_tertiary": 0.094873,
+    "education_unknown": -0.134057,
+    "default_no": -0.123182,
+    "default_yes": -0.325542,
+    "housing_no": 0.131796,
+    "housing_yes": -0.58052,
+    "loan_no": 0.032677,
+    "loan_yes": -0.481401,
+    "poutcome_did not subscribe": -0.679533,
+    "poutcome_not contacted before": -0.982893,
+    "poutcome_other": -0.302132,
+    "poutcome_subscribed": 1.515835
+   }
+  },
+  "bank": {
+   "cases": 40,
+   "ai_accuracy": 0.675,
+   "ai_ece": 0.067942,
+   "auroc": 0.7525
+  }
+ },
+ "credit_limit": {
+  "rows": 30000,
+  "base_rate": 0.2212,
+  "split": [
+   18000,
+   6000,
+   6000
+  ],
+  "test": {
+   "auroc": 0.76335,
+   "accuracy_balanced": 0.699748,
+   "tpr": 0.573474,
+   "tnr": 0.826022,
+   "ece_balanced": 0.020355,
+   "brier_balanced": 0.196725,
+   "n": 6000,
+   "positives": 1327
+  },
+  "boosting_test_auroc": 0.768374,
+  "model": {
+   "c": 0.3,
+   "cv": [
+    {
+     "c": 0.01,
+     "log_loss": 0.441752,
+     "auroc": 0.765081
+    },
+    {
+     "c": 0.03,
+     "log_loss": 0.439287,
+     "auroc": 0.76622
+    },
+    {
+     "c": 0.1,
+     "log_loss": 0.438497,
+     "auroc": 0.766419
+    },
+    {
+     "c": 0.3,
+     "log_loss": 0.438472,
+     "auroc": 0.766341
+    },
+    {
+     "c": 1.0,
+     "log_loss": 0.438613,
+     "auroc": 0.766272
+    },
+    {
+     "c": 3.0,
+     "log_loss": 0.438709,
+     "auroc": 0.766137
+    }
+   ],
+   "platt": [
+    0.977934,
+    -0.035829
+   ],
+   "prior_logit": -1.258639,
+   "coefficients": {
+    "age": 0.032875,
+    "bill_sep": 0.142891,
+    "paid_sep": -0.176368,
+    "paid_aug": -0.205736,
+    "limit": -0.303654,
+    "education_graduate school": 0.200281,
+    "education_high school": 0.161031,
+    "education_other or unknown": -0.900385,
+    "education_university": 0.225461,
+    "marriage_married": -0.00614,
+    "marriage_other or unknown": -0.135051,
+    "marriage_single": -0.172422,
+    "status_sep_1 month late": -0.138707,
+    "status_sep_2 months late": 1.157369,
+    "status_sep_3 months late": 1.037474,
+    "status_sep_4 months late": 0.325223,
+    "status_sep_5 months late": -0.099366,
+    "status_sep_6 months late": 0.067477,
+    "status_sep_7 months late": 0.039811,
+    "status_sep_8 months late": -0.017935,
+    "status_sep_no balance to pay": -0.901257,
+    "status_sep_paid in full": -0.534706,
+    "status_sep_paid the minimum": -1.248994,
+    "status_aug_1 month late": -0.192859,
+    "status_aug_2 months late": 0.113903,
+    "status_aug_3 months late": 0.227096,
+    "status_aug_4 months late": -0.452698,
+    "status_aug_5 months late": 0.049572,
+    "status_aug_6 months late": 0.119718,
+    "status_aug_7 months late": 0.051033,
+    "status_aug_no balance to pay": -0.030915,
+    "status_aug_paid in full": -0.230915,
+    "status_aug_paid the minimum": 0.032453,
+    "status_jul_1 month late": 0.018122,
+    "status_jul_2 months late": 0.161722,
+    "status_jul_3 months late": 0.316969,
+    "status_jul_4 months late": -0.019759,
+    "status_jul_5 months late": 0.111965,
+    "status_jul_6 months late": 0.036032,
+    "status_jul_7 months late": 0.083708,
+    "status_jul_8 months late": 0.009942,
+    "status_jul_no balance to pay": -0.184479,
+    "status_jul_paid in full": -0.429136,
+    "status_jul_paid the minimum": -0.418698
+   }
+  },
+  "bank": {
+   "cases": 40,
+   "ai_accuracy": 0.7,
+   "ai_ece": 0.036612,
+   "auroc": 0.735
+  }
+ }
+}
