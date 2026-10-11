@@ -66,9 +66,12 @@ def render(item: dict[str, Any]) -> str:
             ex = ai["explanation"]
             for key, lab in (("towards_positive", ex["positive_label"]), ("towards_negative", ex["negative_label"])):
                 if ex[key]:
-                    lines.append(f"Factors pointing to {lab}: " + "; ".join(f"{x['label']} = {x['value']} ({x['strength']})" for x in ex[key]))
-    opts = " or ".join(f"\"{o['decision']}\"" for o in item["options"])
-    lines += ["", f"Question: {item['question']}", f"Answer as JSON: {{\"decision\": {opts}, \"confidence\": 50 to 100}}"]
+                    lines.append(
+                        f"Factors pointing to {lab}: "
+                        + "; ".join(f"{x['label']} = {x['value']} ({x['strength']})" for x in ex[key])
+                    )
+    opts = " or ".join(f'"{o["decision"]}"' for o in item["options"])
+    lines += ["", f"Question: {item['question']}", f'Answer as JSON: {{"decision": {opts}, "confidence": 50 to 100}}']
     return "\n".join(lines)
 
 
@@ -91,7 +94,9 @@ class ModelParticipant:
             raise FileNotFoundError(f"{path} is missing: run `make models`")
         self.name, self.label, self.sha256 = name, m["label"], m["sha256"]
         n = threads or int(os.environ.get("DECLAB_LLM_THREADS", cfg["threads"]))
-        self.llm = Llama(model_path=str(path), n_ctx=cfg["n_ctx"], n_threads=n, n_threads_batch=n, verbose=False, seed=0)
+        self.llm = Llama(
+            model_path=str(path), n_ctx=cfg["n_ctx"], n_threads=n, n_threads_batch=n, verbose=False, seed=0
+        )
         self.temperature = float(cfg["temperature"])
         self.calls: list[dict[str, Any]] = []
         self.seed = 0

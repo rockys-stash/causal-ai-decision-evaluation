@@ -85,10 +85,15 @@ def build(raw: Path = RAW, out: Path = BANK) -> dict[str, Any]:
         for kind, frame in (("bank", bank), ("practice", prac)):
             pb, contrib = rec.proba(frame), rec.contributions(frame)
             labels = (dc["positive"]["label"], dc["negative"]["label"])
-            for i, (row_id, row) in enumerate(frame.iterrows()):
+            for i, (row_key, row) in enumerate(frame.iterrows()):
+                row_id: Any = row_key
                 pos = bool(pb[i] >= 0.5)
                 sg = dc["subgroup"]
-                group = (sg["labels"][0] if row[sg["column"]] < sg["below"] else sg["labels"][1]) if "below" in sg else str(row[sg["column"]])
+                group = (
+                    (sg["labels"][0] if row[sg["column"]] < sg["below"] else sg["labels"][1])
+                    if "below" in sg
+                    else str(row[sg["column"]])
+                )
                 c = {"id": f"{d}-{'p' if kind == 'practice' else ''}{i + 1:02d}", "domain": d, "source_row": int(row_id),
                      "card": card(d, row), "outcome": int(row["outcome"]), "subgroup": group,
                      "ai": {"decision": dc["positive" if pos else "negative"]["decision"],
@@ -103,7 +108,9 @@ def build(raw: Path = RAW, out: Path = BANK) -> dict[str, Any]:
         report[d]["bank"] = {"cases": len(bm), "ai_accuracy": float(((pbk >= 0.5).astype(int) == yb).mean()),
                              "ai_ece": ece(yb, pbk, 5), "auroc": float(roc_auc_score(yb, pbk))}  # fmt: skip
     out.mkdir(parents=True, exist_ok=True)
-    (out / "bank.json").write_text(json.dumps({"cases": cases, "practice": practice}, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    (out / "bank.json").write_text(
+        json.dumps({"cases": cases, "practice": practice}, indent=1, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     (out / "ai_report.json").write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     return report
 

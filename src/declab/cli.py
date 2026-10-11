@@ -23,7 +23,9 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("verify", help="check the hash chain of every committed session log")
     a = sub.add_parser("analyse", help="pre-registered analysis of every session log into results/<UTC>-<sha7>")
     a.add_argument("--results", default=None)
-    a.add_argument("--quick", action="store_true", help="fewer permutations and repetitions (checks the pipeline; not a result)")
+    a.add_argument(
+        "--quick", action="store_true", help="fewer permutations and repetitions (checks the pipeline; not a result)"
+    )
     sub.add_parser("report", help="render docs/generated/results.md from results/LATEST")
     sv = sub.add_parser("serve", help="serve the platform (participant pages, researcher console, API)")
     sv.add_argument("--host", default="127.0.0.1")

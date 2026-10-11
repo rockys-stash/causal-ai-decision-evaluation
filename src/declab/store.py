@@ -64,7 +64,15 @@ class Store:
         with self._lock:
             rows = self._con.execute(sql, tuple(args)).fetchall()
         for seq, ts, session, kind, data, prev, h in rows:
-            yield {"seq": seq, "ts": ts, "session": session, "kind": kind, "data": json.loads(data), "prev": prev, "hash": h}
+            yield {
+                "seq": seq,
+                "ts": ts,
+                "session": session,
+                "kind": kind,
+                "data": json.loads(data),
+                "prev": prev,
+                "hash": h,
+            }
 
     def events(self, session: str | None = None) -> list[dict[str, Any]]:
         if session is None:

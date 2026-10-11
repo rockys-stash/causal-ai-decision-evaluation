@@ -23,7 +23,6 @@ import numpy as np
 import pandas as pd
 
 from declab import bank as bankmod
-from declab.bank import ece
 from declab.config import domains, study
 from declab.data import sha256
 from declab.participants import sim_config
@@ -32,8 +31,16 @@ from declab.store import read_jsonl, verify
 
 CONTRASTS = (("C", "A"), ("B", "A"), ("C", "B"))
 POPULATIONS = {
-    "simulated-planted": {"file": "simulated-planted.jsonl", "label": "Simulated participants, planted effects (dry run)", "kind": "simulated"},
-    "simulated-no_effect": {"file": "simulated-no_effect.jsonl", "label": "Simulated participants, no effect (dry run)", "kind": "simulated"},
+    "simulated-planted": {
+        "file": "simulated-planted.jsonl",
+        "label": "Simulated participants, planted effects (dry run)",
+        "kind": "simulated",
+    },
+    "simulated-no_effect": {
+        "file": "simulated-no_effect.jsonl",
+        "label": "Simulated participants, no effect (dry run)",
+        "kind": "simulated",
+    },
     "model": {"file": "model-pilot.jsonl", "label": "Model participants (pilot; not people)", "kind": "model"},
     "human": {"file": "human.jsonl", "label": "Human participants", "kind": "human"},
 }
@@ -53,7 +60,9 @@ def tables(events: list[dict[str, Any]], bank: dict[str, Any]) -> tuple[pd.DataF
             sess[s] = {"session": s, "kind": d["participant_kind"], "model": d["model"] or "", "stratum": d["stratum"],
                        "arm": d["arm"], "slot": d["slot"], "completed": False, "survey": None}  # fmt: skip
         elif e["kind"] == "decision":
-            rows.append({"session": s, **{k: d[k] for k in ("index", "phase", "case", "decision", "confidence", "client_ms")}})
+            rows.append(
+                {"session": s, **{k: d[k] for k in ("index", "phase", "case", "decision", "confidence", "client_ms")}}
+            )
         elif e["kind"] == "timing":
             timing[(s, d["index"])] = d["server_seconds"]
         elif e["kind"] == "survey":
@@ -85,7 +94,10 @@ def tables(events: list[dict[str, Any]], bank: dict[str, Any]) -> tuple[pd.DataF
     fn = {k: v["costs"]["false_negative"] for k, v in dcfg.items()}
     D["cost"] = [np.nan if m else 0.0 if c == r else (fp[d] if c == pos[d] else fn[d])
                  for m, c, r, d in zip(D["missing"], D["decision"], D["right"], D["domain"], strict=True)]  # fmt: skip
-    D["ai_cost"] = [0.0 if a == r else (fp[d] if a == pos[d] else fn[d]) for a, r, d in zip(D["ai_rec"], D["right"], D["domain"], strict=True)]
+    D["ai_cost"] = [
+        0.0 if a == r else (fp[d] if a == pos[d] else fn[d])
+        for a, r, d in zip(D["ai_rec"], D["right"], D["domain"], strict=True)
+    ]
     # Simulated participants do not wait: their time is drawn by the behaviour model and sent as client time.
     D["seconds"] = np.where(D["kind"] == "simulated", D["client_ms"].astype(float) / 1000, D["server_seconds"])
     # Exclusions (PREREGISTRATION)
@@ -95,7 +107,9 @@ def tables(events: list[dict[str, Any]], bank: dict[str, Any]) -> tuple[pd.DataF
         want = {"attention-1": "decline", "attention-2": "approve"}
         fails = att.assign(ok=[want.get(c) == d for c, d in zip(att["case"], att["decision"], strict=True)])
         bad = fails.groupby("session")["ok"].sum()
-        S.loc[S["session"].isin(bad[bad == 0].index) & (S["excluded"] == ""), "excluded"] = "failed both attention checks"
+        S.loc[S["session"].isin(bad[bad == 0].index) & (S["excluded"] == ""), "excluded"] = (
+            "failed both attention checks"
+        )
     miss = D.groupby("session")["missing"].mean()
     S.loc[S["session"].isin(miss[miss > 0.2].index) & (S["excluded"] == ""), "excluded"] = "over 20% invalid answers"
     D = D[D["session"].isin(S.loc[S["excluded"] == "", "session"])]
@@ -170,10 +184,12 @@ def cohens_h(p1: float, p2: float) -> float:
     return float(2 * math.asin(math.sqrt(p1)) - 2 * math.asin(math.sqrt(p2)))
 
 
-def contrast(P: pd.DataFrame, col: str, b: str, a: str, perms: int, boots: int, rng: np.random.Generator) -> dict[str, Any]:
+def contrast(
+    P: pd.DataFrame, col: str, b: str, a: str, perms: int, boots: int, rng: np.random.Generator
+) -> dict[str, Any]:
     sub = P[P["arm"].isin([a, b])]
     va, vb = sub.loc[sub["arm"] == a, col].to_numpy(float), sub.loc[sub["arm"] == b, col].to_numpy(float)
-    out = {"contrast": f"{b}−{a}", "outcome": col, "mean_a": float(np.nanmean(va)) if len(va) else None,
+    out: dict[str, Any] = {"contrast": f"{b}−{a}", "outcome": col, "mean_a": float(np.nanmean(va)) if len(va) else None,
            "mean_b": float(np.nanmean(vb)) if len(vb) else None, "n_a": int((~np.isnan(va)).sum()), "n_b": int((~np.isnan(vb)).sum())}  # fmt: skip
     if out["n_a"] < 2 or out["n_b"] < 2:
         return out | {"diff": None, "ci": None, "p": None}
@@ -204,8 +220,17 @@ def gap_contrast(P: pd.DataFrame, d: str, b: str, a: str, perms: int, rng: np.ra
 
     def arm_gap(arm: str) -> dict[str, float]:
         s = P[P["arm"] == arm]
-        r1, r2 = s[f"err_{d}_{g1}"].sum() / max(s[f"n_{d}_{g1}"].sum(), 1), s[f"err_{d}_{g2}"].sum() / max(s[f"n_{d}_{g2}"].sum(), 1)
-        return {"error_1": float(r1), "error_2": float(r2), "gap": float(r1 - r2), "n_1": int(s[f"n_{d}_{g1}"].sum()), "n_2": int(s[f"n_{d}_{g2}"].sum())}
+        r1, r2 = (
+            s[f"err_{d}_{g1}"].sum() / max(s[f"n_{d}_{g1}"].sum(), 1),
+            s[f"err_{d}_{g2}"].sum() / max(s[f"n_{d}_{g2}"].sum(), 1),
+        )
+        return {
+            "error_1": float(r1),
+            "error_2": float(r2),
+            "gap": float(r1 - r2),
+            "n_1": int(s[f"n_{d}_{g1}"].sum()),
+            "n_2": int(s[f"n_{d}_{g2}"].sum()),
+        }
 
     return {"contrast": f"{b}−{a}", "outcome": f"gap_{d}", "domain": d, "groups": [g1, g2], "diff": obs, "p": p,
             "arm_a": arm_gap(a), "arm_b": arm_gap(b)}  # fmt: skip
@@ -222,14 +247,20 @@ def gee(D: pd.DataFrame) -> dict[str, Any]:
         return {}
     f = "correct ~ C(arm, Treatment('A')) + C(domain)" + (" + C(model)" if v["model"].nunique() > 1 else "")
     try:
-        m = smf.gee(f, groups="session", data=v, family=sm.families.Binomial(), cov_struct=sm.cov_struct.Exchangeable()).fit()
-    except Exception as e:  # noqa: BLE001 - reported, not fatal
+        m = smf.gee(
+            f, groups="session", data=v, family=sm.families.Binomial(), cov_struct=sm.cov_struct.Exchangeable()
+        ).fit()
+    except Exception as e:
         return {"error": str(e)}
     out = {}
     for arm in ("B", "C"):
         k = f"C(arm, Treatment('A'))[T.{arm}]"
         lo, hi = m.conf_int().loc[k]
-        out[f"{arm}_vs_A"] = {"odds_ratio": float(np.exp(m.params[k])), "ci": [float(np.exp(lo)), float(np.exp(hi))], "p": float(m.pvalues[k])}
+        out[f"{arm}_vs_A"] = {
+            "odds_ratio": float(np.exp(m.params[k])),
+            "ci": [float(np.exp(lo)), float(np.exp(hi))],
+            "p": float(m.pvalues[k]),
+        }
     return out
 
 
@@ -239,7 +270,7 @@ def calibration(D: pd.DataFrame, bins: int) -> dict[str, Any]:
         c, y = g["confidence"].to_numpy(float) / 100, g["correct"].to_numpy(float)
         edges = np.linspace(0.5, 1.0, bins + 1)
         idx = np.clip(np.digitize(c, edges[1:-1]), 0, bins - 1)
-        curve = [{"bin": [float(edges[i]), float(edges[i + 1])], "n": int((idx == i).sum()),
+        curve: list[dict[str, Any]] = [{"bin": [float(edges[i]), float(edges[i + 1])], "n": int((idx == i).sum()),
                   "confidence": float(c[idx == i].mean()) if (idx == i).any() else None,
                   "accuracy": float(y[idx == i].mean()) if (idx == i).any() else None} for i in range(bins)]  # fmt: skip
         e = sum(b["n"] * abs(b["confidence"] - b["accuracy"]) for b in curve if b["n"]) / max(len(c), 1)
@@ -248,20 +279,22 @@ def calibration(D: pd.DataFrame, bins: int) -> dict[str, Any]:
     return out
 
 
-def analyse_population(events: list[dict[str, Any]], bank: dict[str, Any], perms: int, boots: int, seed: int) -> dict[str, Any]:
+def analyse_population(
+    events: list[dict[str, Any]], bank: dict[str, Any], perms: int, boots: int, seed: int
+) -> dict[str, Any]:
     rng = np.random.default_rng(seed)
     S, D = tables(events, bank)
     ok, chain = verify(events)
-    res: dict[str, Any] = {"sessions": int(len(S)), "chain_ok": ok, "chain": chain,
+    res: dict[str, Any] = {"sessions": len(S), "chain_ok": ok, "chain": chain,
                            "excluded": S.loc[S["excluded"] != "", ["session", "arm", "excluded"]].to_dict(orient="records") if len(S) else []}  # fmt: skip
     if D.empty:
         return res | {"participants": 0}
     P = participants(D)
-    res["participants"] = int(len(P))
+    res["participants"] = len(P)
     res["decisions"] = int((~D["missing"]).sum())
     res["missing_decisions"] = int(D["missing"].sum())
     res["models"] = sorted(m for m in P["model"].unique() if m)
-    arms = []
+    arms: list[dict[str, Any]] = []
     for arm, g in P.groupby("arm"):
         arms.append({"arm": arm, "participants": len(g), "accuracy": float(g["accuracy"].mean()), "accuracy_sd": float(g["accuracy"].std()),
                      "cost": float(g["cost"].mean()), "median_seconds": float(np.exp(g["log_seconds"].mean())),
@@ -269,7 +302,7 @@ def analyse_population(events: list[dict[str, Any]], bank: dict[str, Any], perms
                      "appropriate": float(g["appropriate"].mean()), "brier": float(g["brier"].mean()), "confidence": float(g["confidence"].mean()),
                      "ai_accuracy": float(g["ai_accuracy"].mean()), "ai_cost": float(g["ai_cost"].mean())})  # fmt: skip
     res["arms"] = arms
-    acc = {a["arm"]: a["accuracy"] for a in arms}
+    acc: dict[str, float] = {str(a["arm"]): float(a["accuracy"]) for a in arms}
     prim = [contrast(P, "accuracy", b, a, perms, boots, rng) for b, a in CONTRASTS]
     ph = holm([c["p"] if c["p"] is not None else 1.0 for c in prim])
     for c, h in zip(prim, ph, strict=True):
@@ -309,7 +342,9 @@ def _sim_arrays(bank: dict[str, Any]) -> dict[str, Any]:
             "ai_p": np.array([c["ai"]["p_positive"] for c in cs])}  # fmt: skip
 
 
-def simulate_accuracy(p: dict[str, Any], arm: str, idx: np.ndarray, A: dict[str, Any], rng: np.random.Generator) -> np.ndarray:
+def simulate_accuracy(
+    p: dict[str, Any], arm: str, idx: np.ndarray, A: dict[str, Any], rng: np.random.Generator
+) -> np.ndarray:
     """Vectorised form of ``participants.behave`` (same formulas): correctness of each decision in idx (n, 24)."""
     y, ap = A["outcome"][idx], A["ai_p"][idx]
     ai_logit = np.log(ap / (1 - ap))
@@ -340,11 +375,16 @@ def power(bank: dict[str, Any], quick: bool, seed: int) -> dict[str, Any]:
     truth = {}
     for design in ("planted", "no_effect"):
         idx = _draw_cases(20000, A, rng)
-        truth[design] = {arm: float(simulate_accuracy(cfg["designs"][design], arm, idx, A, rng).mean()) for arm in "ABC"}
+        truth[design] = {
+            arm: float(simulate_accuracy(cfg["designs"][design], arm, idx, A, rng).mean()) for arm in "ABC"
+        }
     out["expected_accuracy"] = truth
 
     def one(design: str, n: int) -> list[float]:
-        accs = {arm: simulate_accuracy(cfg["designs"][design], arm, _draw_cases(n, A, rng), A, rng).mean(axis=1) for arm in "ABC"}
+        accs = {
+            arm: simulate_accuracy(cfg["designs"][design], arm, _draw_cases(n, A, rng), A, rng).mean(axis=1)
+            for arm in "ABC"
+        }
         ps = []
         for b, a in CONTRASTS:
             v = np.concatenate([accs[a], accs[b]])
@@ -390,7 +430,9 @@ def power(bank: dict[str, Any], quick: bool, seed: int) -> dict[str, Any]:
 # ---------- run ----------
 def git_commit() -> tuple[str, bool]:
     try:
-        sha = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+        sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True
+        ).stdout.strip()
         dirty = bool(subprocess.run(["git", "status", "--porcelain", "--", "src", "configs", "data"], cwd=ROOT,
                                     capture_output=True, text=True, check=True).stdout.strip())  # fmt: skip
     except (subprocess.CalledProcessError, FileNotFoundError):
@@ -446,7 +488,13 @@ def run(results: Path = RESULTS, quick: bool = False, sessions: Path = SESSIONS)
     write(out / "reliance.json", {k: {"arms": v.get("arms"), "by_domain": v.get("by_domain"), "by_model": v.get("by_model"),
                                       "participants": v.get("participant_table")} for k, v in pops.items()})  # fmt: skip
     write(out / "calibration.json", {k: v.get("calibration") for k, v in pops.items()})
-    write(out / "subgroups.json", {k: [c for c in (v.get("secondary") or []) if str(c.get("outcome", "")).startswith("gap_")] for k, v in pops.items()})
+    write(
+        out / "subgroups.json",
+        {
+            k: [c for c in (v.get("secondary") or []) if str(c.get("outcome", "")).startswith("gap_")]
+            for k, v in pops.items()
+        },
+    )
     write(out / "power.json", pw)
     write(out / "ai.json", json.loads((BANK / "ai_report.json").read_text(encoding="utf-8")))
     files = [*sorted((ROOT / "src" / "declab").glob("*.py")), *sorted(CONFIGS.glob("*.yaml")), BANK / "bank.json",
@@ -456,7 +504,7 @@ def run(results: Path = RESULTS, quick: bool = False, sessions: Path = SESSIONS)
         "runtime_seconds": round(time.perf_counter() - t0, 1), "python": platform.python_version(), "cpus": os.cpu_count(),
         "permutations": perms, "bootstrap": boots,
         "packages": {p: metadata.version(p) for p in ("numpy", "pandas", "scipy", "scikit-learn", "statsmodels", "fastapi")},
-        "inputs_sha256": {str(f.relative_to(ROOT)): sha256(f) for f in files if f.exists()},
+        "inputs_sha256": {(str(f.relative_to(ROOT)) if f.is_relative_to(ROOT) else f.name): sha256(f) for f in files if f.exists()},
         "preregistration_amendments": (DOCS / "PREREGISTRATION.md").read_text(encoding="utf-8").count("**A"),
     })  # fmt: skip
     if (not dirty and not quick) or results != RESULTS:

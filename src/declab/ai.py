@@ -35,9 +35,24 @@ def _pre(flds: list[Field]) -> ColumnTransformer:
     num = [f.column for f in flds if f.kind == "num" and not f.log]
     lognum = [f.column for f in flds if f.kind == "num" and f.log]
     cat = [f.column for f in flds if f.kind == "cat"]
-    parts: list[tuple[str, Any, list[str]]] = [("num", StandardScaler(), num), ("cat", OneHotEncoder(handle_unknown="ignore"), cat)]
+    parts: list[tuple[str, Any, list[str]]] = [
+        ("num", StandardScaler(), num),
+        ("cat", OneHotEncoder(handle_unknown="ignore"), cat),
+    ]
     if lognum:
-        parts.insert(1, ("log", Pipeline([("log", FunctionTransformer(_signed_log, feature_names_out="one-to-one")), ("sc", StandardScaler())]), lognum))
+        parts.insert(
+            1,
+            (
+                "log",
+                Pipeline(
+                    [
+                        ("log", FunctionTransformer(_signed_log, feature_names_out="one-to-one")),
+                        ("sc", StandardScaler()),
+                    ]
+                ),
+                lognum,
+            ),
+        )
     return ColumnTransformer(parts, sparse_threshold=0.0, verbose_feature_names_out=False)
 
 
@@ -118,16 +133,25 @@ def strength(v: float) -> str:
     return "strong" if a >= 1.0 else "moderate" if a >= 0.4 else "weak"
 
 
-def explain(rec: Recommender, row_contrib: pd.Series, row: pd.Series, k: int, labels: tuple[str, str]) -> dict[str, Any]:
+def explain(
+    rec: Recommender, row_contrib: pd.Series, row: pd.Series, k: int, labels: tuple[str, str]
+) -> dict[str, Any]:
     """The k fields pushing most towards each decision, in the participant's words."""
     from declab.data import fmt
 
     by = {f.column: f for f in fields(rec.domain)}
     s = row_contrib.sort_values()
+
     def item(col: str, v: float) -> dict[str, Any]:
         f = by[col]
-        return {"field": col, "label": f.label, "value": fmt(f, row[col]), "weight": round(float(v), 3), "strength": strength(v)}
+        return {
+            "field": col,
+            "label": f.label,
+            "value": fmt(f, row[col]),
+            "weight": round(float(v), 3),
+            "strength": strength(v),
+        }
 
-    pos = [item(c, v) for c, v in s[::-1].items() if v > 0][:k]
-    neg = [item(c, v) for c, v in s.items() if v < 0][:k]
+    pos = [item(str(c), v) for c, v in s[::-1].items() if v > 0][:k]
+    neg = [item(str(c), v) for c, v in s.items() if v < 0][:k]
     return {"towards_positive": pos, "towards_negative": neg, "positive_label": labels[0], "negative_label": labels[1]}

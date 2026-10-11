@@ -59,7 +59,9 @@ def simulated_chooser(design: str, cases: dict[str, Any], rng: np.random.Generat
     def choose(item: dict[str, Any], arm: str) -> tuple[str | None, int | None, int | None]:
         case = cases[item["case_id"]]
         pos, neg = item["options"][0]["decision"], item["options"][1]["decision"]
-        choice, conf, secs = behave(p, arm, bool(case["outcome"]), case["ai"]["p_positive"], item["ai"] is not None, rng)
+        choice, conf, secs = behave(
+            p, arm, bool(case["outcome"]), case["ai"]["p_positive"], item["ai"] is not None, rng
+        )
         return (pos if choice else neg), conf, int(secs * 1000)
 
     return choose
@@ -70,7 +72,9 @@ def run_session(client: Client, chooser: Chooser, kind: str, headers: dict[str, 
     """Take (or resume) one session to completion; returns its id."""
     h = headers or {}
     if session is None:
-        r = client.post("/api/sessions", json={"consent": True, "kind": kind, "model": model, "label": label}, headers=h)
+        r = client.post(
+            "/api/sessions", json={"consent": True, "kind": kind, "model": model, "label": label}, headers=h
+        )
         r.raise_for_status()
         session = str(r.json()["session"])
     while True:

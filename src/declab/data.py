@@ -15,7 +15,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-import numpy as np
 import pandas as pd
 
 from declab.config import study
@@ -71,10 +70,21 @@ LOAN_FIELDS = [
     Field("property", "Most valuable property", "cat"),
     Field("existing_credits", "Existing credits at this bank", "num"),
 ]
-_CHECKING = {"<0": "overdrawn", "0<=X<200": "under 200 DM", ">=200": "200 DM or more", "no checking": "no checking account"}
+_CHECKING = {
+    "<0": "overdrawn",
+    "0<=X<200": "under 200 DM",
+    ">=200": "200 DM or more",
+    "no checking": "no checking account",
+}
 _SAVINGS = {"<100": "under 100 DM", "100<=X<500": "100–500 DM", "500<=X<1000": "500–1,000 DM", ">=1000": "1,000 DM or more",
             "no known savings": "none known"}  # fmt: skip
-_EMPLOYMENT = {"unemployed": "unemployed", "<1": "under 1 year", "1<=X<4": "1–4 years", "4<=X<7": "4–7 years", ">=7": "7 years or more"}
+_EMPLOYMENT = {
+    "unemployed": "unemployed",
+    "<1": "under 1 year",
+    "1<=X<4": "1–4 years",
+    "4<=X<7": "4–7 years",
+    ">=7": "7 years or more",
+}
 _HISTORY = {"critical/other existing credit": "critical account or credits elsewhere", "existing paid": "existing credits paid on time",
             "delayed previously": "payments delayed in the past", "no credits/all paid": "no credits taken, or all paid back",
             "all paid": "all credits at this bank paid back"}  # fmt: skip
@@ -118,7 +128,12 @@ MARKETING_FIELDS = [
     Field("previous", "Contacts in earlier campaigns", "num"),
     Field("poutcome", "Earlier campaign result", "cat"),
 ]
-_POUTCOME = {"unknown": "not contacted before", "failure": "did not subscribe", "other": "other", "success": "subscribed"}
+_POUTCOME = {
+    "unknown": "not contacted before",
+    "failure": "did not subscribe",
+    "other": "other",
+    "success": "subscribed",
+}
 
 
 def _marketing(df: pd.DataFrame) -> pd.DataFrame:
@@ -216,4 +231,3 @@ def fmt(f: Field, v: Any) -> str:
 
 def card(domain: str, row: pd.Series) -> list[dict[str, str]]:
     return [{"field": f.column, "label": f.label, "value": fmt(f, row[f.column])} for f in fields(domain)]
-

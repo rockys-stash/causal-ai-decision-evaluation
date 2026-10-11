@@ -35,17 +35,25 @@ def table(head: list[str], rows: list[list[str]]) -> str:
         return all(re.match(r"^[\d−+<–\[]", r[i]) for r in rows if r[i] != "–")
 
     align = ["---:" if i and numeric(i) else "---" for i in range(len(head))]
-    return "\n".join(["| " + " | ".join(head) + " |", "| " + " | ".join(align) + " |"] + ["| " + " | ".join(r) + " |" for r in rows])
+    return "\n".join(
+        ["| " + " | ".join(head) + " |", "| " + " | ".join(align) + " |"] + ["| " + " | ".join(r) + " |" for r in rows]
+    )
 
 
 def _ci(c: list[float] | None, scale: float = 100) -> str:
     return "–" if not c else f"{c[0] * scale:+.1f} to {c[1] * scale:+.1f}".replace("-", "−")
 
 
-def population(key: str, v: dict[str, Any], sec: list[dict[str, Any]], cal: dict[str, Any], rel: dict[str, Any]) -> list[str]:
+def population(
+    key: str, v: dict[str, Any], sec: list[dict[str, Any]], cal: dict[str, Any], rel: dict[str, Any]
+) -> list[str]:
     L = [f"## {v['label']}", ""]
     if not v.get("participants"):
-        L += [f"**Status: {v['status']}.** No sessions of this kind have been run" + (" (no participants could be recruited in this environment)." if v["kind"] == "human" else "."), ""]
+        L += [
+            f"**Status: {v['status']}.** No sessions of this kind have been run"
+            + (" (no participants could be recruited in this environment)." if v["kind"] == "human" else "."),
+            "",
+        ]
         return L
     L += [f"{v['participants']} participants, {v['decisions']:,} analysed decisions"
           + (f", {v['missing_decisions']} invalid model answers recorded as missing" if v.get("missing_decisions") else "")
@@ -55,7 +63,10 @@ def population(key: str, v: dict[str, Any], sec: list[dict[str, Any]], cal: dict
     L += [table(["Arm", "Participants", "Accuracy", "SD", "Cost / decision", "Median s", "AI accuracy (same cases)", "AI cost"],
                 [[ARM[a["arm"]], str(a["participants"]), pct(a["accuracy"]), pct(a["accuracy_sd"]), num(a["cost"]), num(a["median_seconds"], 1),
                   pct(a["ai_accuracy"]), num(a["ai_cost"])] for a in v["arms"]]), ""]  # fmt: skip
-    L += ["**Primary: accuracy** (randomization test, 10,000 permutations within stratum; Holm over three contrasts; 95% bootstrap interval in percentage points).", ""]
+    L += [
+        "**Primary: accuracy** (randomization test, 10,000 permutations within stratum; Holm over three contrasts; 95% bootstrap interval in percentage points).",
+        "",
+    ]
     L += [table(["Contrast", "Difference (pp)", "95% CI", "Cohen's h", "Error reduction", "p", "p (Holm)"],
                 [[c["contrast"], pp(c.get("diff")), _ci(c.get("ci")), num(c.get("cohens_h")), pct(c.get("error_reduction")),
                   pval(c.get("p")), pval(c.get("p_holm"))] for c in v["primary"]]), ""]  # fmt: skip
@@ -70,11 +81,24 @@ def population(key: str, v: dict[str, Any], sec: list[dict[str, Any]], cal: dict
         scale = 100 if c["outcome"] in ("override", "appropriate") else 1
         d = c.get("diff")
         dv = "–" if d is None else (pp(d) if scale == 100 else num(d, 3))
-        rows.append([OUTCOME[c["outcome"]], c["contrast"], num(c.get("mean_a"), 3), num(c.get("mean_b"), 3), dv, pval(c.get("p")), pval(c.get("p_holm"))])
+        rows.append(
+            [
+                OUTCOME[c["outcome"]],
+                c["contrast"],
+                num(c.get("mean_a"), 3),
+                num(c.get("mean_b"), 3),
+                dv,
+                pval(c.get("p")),
+                pval(c.get("p_holm")),
+            ]
+        )
     L += ["**Secondary** (one family, Holm-corrected together, with the subgroup gaps below).", "",
           table(["Outcome", "Contrast", "First arm", "Second arm", "Difference", "p", "p (Holm)"], rows), ""]  # fmt: skip
-    L += ["**Reliance.** Agreement with the AI's recommendation when it was right and when it was wrong (in arm A the "
-          "recommendation was computed but not shown).", ""]
+    L += [
+        "**Reliance.** Agreement with the AI's recommendation when it was right and when it was wrong (in arm A the "
+        "recommendation was computed but not shown).",
+        "",
+    ]
     L += [table(["Arm", "Agree overall", "Agree, AI right", "Agree, AI wrong", "Appropriate reliance", "Mean confidence", "Brier"],
                 [[ARM[a["arm"]], pct(a["agree"]), pct(a["agree_right"]), pct(a["agree_wrong"]), pp(a["appropriate"]), num(a["confidence"], 1), num(a["brier"], 3)]
                  for a in v["arms"]]), ""]  # fmt: skip
@@ -102,7 +126,9 @@ def render(results: Path = RESULTS, out: Path | None = None) -> Path:
     def j(name: str) -> Any:
         return json.loads((d / f"{name}.json").read_text(encoding="utf-8"))
 
-    ov, prim, sec, cal, rel, pw, ai, prov = (j(n) for n in ("overview", "primary", "secondary", "calibration", "reliance", "power", "ai", "provenance"))
+    ov, prim, sec, cal, rel, pw, ai, prov = (
+        j(n) for n in ("overview", "primary", "secondary", "calibration", "reliance", "power", "ai", "provenance")
+    )
     L = ["# Results", "",
          f"Generated by `declab report` from `results/{rid}` (commit `{prov['commit'][:7]}`, {'uncommitted changes' if prov['dirty'] else 'clean tree'}"
          f"{', quick settings' if prov['quick'] else ''}, {prov['runtime_seconds']} s). Do not edit by hand.", "",
@@ -112,9 +138,13 @@ def render(results: Path = RESULTS, out: Path | None = None) -> Path:
     L += [table(["Participants", "Status", "Sessions", "Analysed participants", "Decisions", "Log"],
                 [[v["label"], v["status"], str(v["sessions"]), str(v["participants"]), f"{v['decisions']:,}" if v.get("decisions") else "–",
                   f"`{v['file']}`"] for v in ov["populations"].values()]), ""]  # fmt: skip
-    L += ["## The AI recommender", "",
-          "Logistic regression per domain, calibrated on a held-out part and shifted to the bank's 50% base rate. Test metrics are "
-          "on the outcome-balanced test part; the bank is 40 cases per domain drawn from it.", ""]
+    L += [
+        "## The AI recommender",
+        "",
+        "Logistic regression per domain, calibrated on a held-out part and shifted to the bank's 50% base rate. Test metrics are "
+        "on the outcome-balanced test part; the bank is 40 cases per domain drawn from it.",
+        "",
+    ]
     L += [table(["Domain", "Records", "Base rate", "Test AUROC", "Boosting AUROC", "Balanced accuracy", "ECE (balanced)", "Bank accuracy", "Bank ECE"],
                 [[k.replace("_", " "), f"{x['rows']:,}", pct(x["base_rate"]), num(x["test"]["auroc"], 3), num(x["boosting_test_auroc"], 3),
                   pct(x["test"]["accuracy_balanced"]), num(x["test"]["ece_balanced"], 3), pct(x["bank"]["ai_accuracy"]), num(x["bank"]["ai_ece"], 3)]

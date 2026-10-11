@@ -30,14 +30,31 @@ from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoin
 from declab import bank as bankmod
 from declab import design
 from declab.config import domains, study
-from declab.paths import RESULTS, ROOT, VAR
-from declab.store import Store, verify
+from declab.paths import RESULTS, ROOT, SESSIONS, VAR
+from declab.store import Store, read_jsonl, verify
 
 _RUN = re.compile(r"^[0-9]{8}T[0-9]{6}Z-[0-9a-z]{4,40}$")
 _SID = re.compile(r"^[0-9a-f]{32}$")
-RESULT_TOPICS = ("overview", "primary", "secondary", "reliance", "calibration", "subgroups", "power", "ai", "provenance")
+RESULT_TOPICS = (
+    "overview",
+    "primary",
+    "secondary",
+    "reliance",
+    "calibration",
+    "subgroups",
+    "power",
+    "ai",
+    "provenance",
+)
 KINDS = ("human", "simulated", "model")
 LOOPBACK = {"127.0.0.1", "::1", "localhost", "testclient"}
+BATCHES = {"model-pilot": "Model participants (pilot)", "simulated-planted": "Simulated, planted effects (dry run)",
+           "simulated-no_effect": "Simulated, no effect (dry run)", "human": "Human participants"}  # fmt: skip
+
+
+def _right(case: dict[str, Any]) -> str:
+    d = domains()[case["domain"]]
+    return str(d["positive"]["decision"] if case["outcome"] else d["negative"]["decision"])
 
 
 class RateLimiter:
@@ -79,13 +96,19 @@ class Guard(BaseHTTPMiddleware):
                 return JSONResponse({"detail": "method not allowed"}, status_code=405)
             if int(request.headers.get("content-length") or 0) > 16_384:
                 return JSONResponse({"detail": "request too large"}, status_code=413)
-            if path.startswith("/api/lab") and self.token and not hmac.compare_digest(_bearer(request).encode(), self.token.encode()):
+            if (
+                path.startswith("/api/lab")
+                and self.token
+                and not hmac.compare_digest(_bearer(request).encode(), self.token.encode())
+            ):
                 return JSONResponse({"detail": "unauthorized"}, status_code=401)
         response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
         response.headers["X-Frame-Options"] = "DENY"
-        response.headers["Cache-Control"] = "no-store" if path.startswith("/api") else response.headers.get("Cache-Control", "")
+        response.headers["Cache-Control"] = (
+            "no-store" if path.startswith("/api") else response.headers.get("Cache-Control", "")
+        )
         response.headers["Content-Security-Policy"] = (
             "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
             "font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
@@ -174,8 +197,11 @@ class Lab:
 
 
 def create_app(token: str = "", store: Store | None = None, bank: dict[str, Any] | None = None,
-               results: Path | None = None, static_dir: Path | None = None, rate_limit: bool = True) -> FastAPI:  # fmt: skip
+               results: Path | None = None, static_dir: Path | None = None, rate_limit: bool = True,
+               sessions: Path | None = None) -> FastAPI:  # fmt: skip
     st = store or Store(VAR / "lab.db")
+    sessions_dir = (sessions or SESSIONS).resolve()
+    log_cache: dict[tuple[str, int], list[dict[str, Any]]] = {}
     lab = Lab(st, bank or bankmod.read())
     res = (results or RESULTS).resolve()
     static = (static_dir or ROOT / "web" / "dist").resolve()
@@ -299,6 +325,70 @@ def create_app(token: str = "", store: Store | None = None, bank: dict[str, Any]
     @app.get("/api/lab/design")
     def lab_design() -> dict[str, Any]:
         return {"study": study(), "allocation_preview": {s: design.allocation(s, 12) for s in ("human", "simulated")}}
+
+    def batch_events(batch: str) -> list[dict[str, Any]]:
+        if batch not in BATCHES:
+            raise HTTPException(404, "unknown session log")
+        f = sessions_dir / f"{batch}.jsonl"
+        if not f.is_file():
+            raise HTTPException(404, "this session log does not exist yet")
+        key = (batch, f.stat().st_mtime_ns)
+        if key not in log_cache:
+            log_cache.clear()
+            log_cache[key] = read_jsonl(f)
+        return log_cache[key]
+
+    @app.get("/api/lab/logs")
+    def lab_logs() -> list[dict[str, Any]]:
+        out = []
+        for b, label in BATCHES.items():
+            f = sessions_dir / f"{b}.jsonl"
+            if not f.is_file():
+                out.append({"batch": b, "label": label, "status": "pending", "sessions": 0, "events": 0})
+                continue
+            evs = batch_events(b)
+            ok, msg = verify(evs)
+            out.append({"batch": b, "label": label, "status": "logged", "sessions": sum(e["kind"] == "session_created" for e in evs),
+                        "completed": sum(e["kind"] == "session_completed" for e in evs), "events": len(evs), "chain_ok": ok, "chain": msg})  # fmt: skip
+        return out
+
+    @app.get("/api/lab/logs/{batch}/sessions")
+    def lab_log_sessions(batch: str) -> list[dict[str, Any]]:
+        out: dict[str, dict[str, Any]] = {}
+        for e in batch_events(batch):
+            if e["kind"] == "session_created":
+                d = e["data"]
+                out[e["session"]] = {"session": e["session"], "kind": d["participant_kind"], "model": d["model"], "label": d["label"],
+                                     "arm": d["arm"], "slot": d["slot"], "started": e["ts"], "decisions": 0, "correct": 0,
+                                     "items": len(d["items"]), "completed": False}  # fmt: skip
+            elif e["kind"] == "decision" and e["session"] in out:
+                r = out[e["session"]]
+                r["decisions"] += 1
+                c = lab.cases.get(e["data"]["case"])
+                if c and e["data"]["phase"] == "task" and e["data"]["decision"] == _right(c):
+                    r["correct"] += 1
+            elif e["kind"] == "session_completed" and e["session"] in out:
+                out[e["session"]]["completed"] = True
+        return list(out.values())
+
+    @app.get("/api/lab/logs/{batch}/sessions/{sid}")
+    def lab_log_session(batch: str, sid: str) -> dict[str, Any]:
+        if not _SID.match(sid):
+            raise HTTPException(404, "no such session")
+        evs = [e for e in batch_events(batch) if e["session"] == sid]
+        if not evs:
+            raise HTTPException(404, "no such session")
+        created = evs[0]["data"]
+        state = {"arm": created["arm"], "items": created["items"]}
+        items = [lab.item(state, i) for i in range(len(created["items"]))]
+        outcomes = {c["id"]: {"right": _right(c), "ai": c["ai"]["decision"]} for c in lab.cases.values()}
+        return {"events": evs, "items": items, "outcomes": {i["case_id"]: outcomes.get(i["case_id"]) for i in items}}
+
+    @app.get("/api/lab/preview/{arm}/{case_id}")
+    def lab_preview(arm: str, case_id: str) -> dict[str, Any]:
+        if arm not in design.ARMS or case_id not in lab.cases:
+            raise HTTPException(404, "unknown arm or case")
+        return lab.item({"arm": arm, "items": [{"phase": "task", "case": case_id}]}, 0)
 
     def run_dir() -> Path:
         m = res / "LATEST"
