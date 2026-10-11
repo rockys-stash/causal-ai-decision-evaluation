@@ -48,8 +48,8 @@ study pending.**
   with a SHA-256 chain, exported to JSONL; `declab verify` checks all four logs in CI.
 - Allocation lists are generated before the first session from a seeded hash, and their hash is in
   each session's first event, so assignment can be audited.
-- The bank is rebuilt from the hash-checked datasets in CI and must match the committed bank byte
-  for byte.
+- The bank is rebuilt from the hash-checked datasets in CI and must match the committed cases byte
+  for byte and its fitted numbers to a relative 1e-9 (D16: runners differ in the last digits).
 - Results are versioned (`results/<UTC>-<sha7>` with config, commit, dirty flag, package versions
   and input hashes); `LATEST` moves only on a clean run.
 - ruff, ruff format, mypy strict, ESLint and `tsc`; CI runs unit tests, verification, a smoke

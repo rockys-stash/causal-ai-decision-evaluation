@@ -29,9 +29,10 @@ jobs:
         run: make smoke
       - name: Download the datasets, rebuild the case bank and check it matches the committed one
         run: |
+          cp -r data/bank /tmp/committed-bank
           uv run declab data
           uv run declab bank
-          git diff --exit-code data/bank
+          uv run python scripts/compare_bank.py /tmp/committed-bank data/bank
 
   web:
     runs-on: ubuntu-latest

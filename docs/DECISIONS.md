@@ -87,3 +87,10 @@ mostly paid (20% defaulted): that, not the sex of the customer (which is never s
 large arm-A gap. The report says so next to the table. For the human study, gaps in
 false-positive and false-negative rates within outcome will be reported as an exploratory
 addition, recorded with A2's analysis unchanged.
+
+**D16. The rebuilt bank is compared exactly for cases and with a tolerance for fitted numbers.**
+CI rebuilds the bank from the downloaded datasets. On GitHub's runners the cases, outcomes and
+recommendations (`bank.json`) were identical, but fitted coefficients in `ai_report.json` differed
+in the 13th–14th significant digit, from the machine's floating-point libraries. CI now requires
+`bank.json` to match byte for byte and compares `ai_report.json` with a relative tolerance of
+1e-9 (`scripts/compare_bank.py`).

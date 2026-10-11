@@ -77,7 +77,7 @@ make models pilot   # download the two local models (~5 GB) and rerun the model 
 ```
 
 `make smoke` runs a quick analysis into `results/scratch` (what CI runs). CI also rebuilds the
-committed bank and requires it to match byte for byte.
+bank from the datasets: the cases must match byte for byte, the fitted numbers to 1e-9 (D16).
 
 ## Screenshots
 
